@@ -1,8 +1,9 @@
-[gd_scene load_steps=19 format=3 uid="uid://hhgrn0x4be0o"]
+[gd_scene load_steps=20 format=3 uid="uid://hhgrn0x4be0o"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_fs2d3"]
-[ext_resource type="Texture2D" uid="uid://c5tovbtg31aly" path="res://player/chipmunk.png" id="2_xea5d"]
-[ext_resource type="Texture2D" uid="uid://b0edf6wwwu5as" path="res://player/crouching_chipmunk.png" id="3_bouvk"]
+[ext_resource type="Texture2D" uid="uid://dahaux5tcbrky" path="res://player/chipmunk.png" id="2_xea5d"]
+[ext_resource type="Script" path="res://player/cheek.gd" id="3_8k74h"]
+[ext_resource type="Texture2D" uid="uid://bl2s4g1v6ksci" path="res://player/crouching_chipmunk.png" id="3_bouvk"]
 [ext_resource type="Texture2D" uid="uid://cadnyurilui1h" path="res://player/leg.png" id="3_k3hfn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yeyjv"]
@@ -168,6 +169,15 @@ disabled = true
 position = Vector2(0, -80)
 texture = ExtResource("2_xea5d")
 
+[node name="Cheek_Right" type="Marker2D" parent="SpriteHolder/StandingSprite"]
+position = Vector2(-1, -31)
+script = ExtResource("3_8k74h")
+
+[node name="Cheek_Left" type="Marker2D" parent="SpriteHolder/StandingSprite"]
+z_index = -2
+position = Vector2(19, -31)
+script = ExtResource("3_8k74h")
+
 [node name="Leg_Right" type="Sprite2D" parent="SpriteHolder/StandingSprite"]
 position = Vector2(2, 51)
 texture = ExtResource("3_k3hfn")
@@ -185,6 +195,15 @@ offset = Vector2(-4, 0)
 visible = false
 position = Vector2(0, -80)
 texture = ExtResource("3_bouvk")
+
+[node name="Cheek_Right" type="Marker2D" parent="SpriteHolder/CrouchingSprite"]
+position = Vector2(5, 62)
+script = ExtResource("3_8k74h")
+
+[node name="Cheek_Left" type="Marker2D" parent="SpriteHolder/CrouchingSprite"]
+z_index = -2
+position = Vector2(25, 62)
+script = ExtResource("3_8k74h")
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 libraries = {

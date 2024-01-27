@@ -5,6 +5,7 @@ signal died
 
 const SPEED = 300.0
 const JUMP_VELOCITY = -800.0
+const CHEEK_SIZES := [0, 8, 12, 14]
 
 @export var shoot_cooldown_time := 0.5
 @export var stun_duration := 2.5
@@ -15,9 +16,14 @@ const JUMP_VELOCITY = -800.0
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var id : int
+var _max_nuts := CHEEK_SIZES.size() - 1
 var _can_shoot := true
 var _x_facing := 1
-var _stored_nuts := 0
+var _stored_nuts := 0:
+	set(value):
+		_stored_nuts = value
+		for cheek in _cheeks:
+			cheek.radius = CHEEK_SIZES[_stored_nuts]
 var _stunned := false
 var _crouching := false:
 	set(value):
@@ -35,7 +41,13 @@ var _crouching := false:
 @onready var _standing_collision_shape := $CollisionShape2D
 @onready var _crouching_sprite := $SpriteHolder/CrouchingSprite
 @onready var _crouching_collision_shape := $CrouchingCollisionShape2D
-@onready var state_machine = $AnimationTree["parameters/playback"]
+@onready var _state_machine = $AnimationTree["parameters/playback"]
+@onready var _cheeks := [
+	$SpriteHolder/StandingSprite/Cheek_Right,
+	$SpriteHolder/StandingSprite/Cheek_Left,
+	$SpriteHolder/CrouchingSprite/Cheek_Right,
+	$SpriteHolder/CrouchingSprite/Cheek_Left,
+]
 
 
 func _ready():
@@ -69,11 +81,11 @@ func _physics_process(delta):
 				velocity.x = direction * SPEED
 				_x_facing = sign(direction)
 				_sprite_holder.scale.x = _x_facing
-				state_machine.travel("run")
+				_state_machine.travel("run")
 			else:
 				velocity.x = move_toward(velocity.x, 0, SPEED)
 				if velocity.x == 0:
-					state_machine.travel("idle")
+					_state_machine.travel("idle")
 
 	move_and_slide()
 
@@ -132,8 +144,9 @@ func _shoot()->void:
 func _crouch()->void:
 	_crouching = true
 	for nut in _nut_pickup_area.get_overlapping_bodies():
-		nut.pickup()
-		_stored_nuts += 1
+		if _stored_nuts < _max_nuts:
+			nut.pickup()
+			_stored_nuts += 1
 
 
 func hit()->void:
