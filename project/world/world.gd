@@ -1,7 +1,7 @@
 extends Node2D
 
 ## The number of players that start in this round of the game
-@export var joined_player_ids : Array[int] = [0, 2]
+@export var joined_player_ids : Array[int] = [0, 1, 2, 3]
 @export var seconds_between_rounds := 3.0
 
 @onready var _spawn_point_parent := $SpawnPoints

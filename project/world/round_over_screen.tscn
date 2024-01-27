@@ -1,6 +1,15 @@
-[gd_scene load_steps=2 format=3 uid="uid://cpxsloc30cse5"]
+[gd_scene load_steps=5 format=3 uid="uid://cpxsloc30cse5"]
 
 [ext_resource type="Script" path="res://world/round_over_screen.gd" id="1_mdsyc"]
+[ext_resource type="FontFile" uid="uid://d3mue5uggm4qm" path="res://luckiest_guy.ttf" id="2_cqw5p"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_fipf4"]
+font = ExtResource("2_cqw5p")
+font_size = 64
+
+[sub_resource type="LabelSettings" id="LabelSettings_qbwle"]
+font = ExtResource("2_cqw5p")
+font_size = 32
 
 [node name="RoundOverScreen" type="PanelContainer"]
 anchors_preset = 15
@@ -14,6 +23,7 @@ script = ExtResource("1_mdsyc")
 layout_mode = 2
 size_flags_vertical = 0
 text = "Round Over"
+label_settings = SubResource("LabelSettings_fipf4")
 horizontal_alignment = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
@@ -23,16 +33,20 @@ alignment = 1
 
 [node name="Player0Label" type="Label" parent="VBoxContainer"]
 layout_mode = 2
+label_settings = SubResource("LabelSettings_qbwle")
 horizontal_alignment = 1
 
 [node name="Player1Label" type="Label" parent="VBoxContainer"]
 layout_mode = 2
+label_settings = SubResource("LabelSettings_qbwle")
 horizontal_alignment = 1
 
 [node name="Player2Label" type="Label" parent="VBoxContainer"]
 layout_mode = 2
+label_settings = SubResource("LabelSettings_qbwle")
 horizontal_alignment = 1
 
 [node name="Player3Label" type="Label" parent="VBoxContainer"]
 layout_mode = 2
+label_settings = SubResource("LabelSettings_qbwle")
 horizontal_alignment = 1
