@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://cb1t8bqr7040n"]
+[gd_scene load_steps=10 format=3 uid="uid://cb1t8bqr7040n"]
 
 [ext_resource type="Script" path="res://world/world.gd" id="1_aelts"]
+[ext_resource type="Texture2D" uid="uid://dnkjujkdudd8y" path="res://world/colored_land.png" id="2_agjtm"]
 [ext_resource type="Texture2D" uid="uid://dnyfo3tlpsi11" path="res://world/platformPack_tile001.png" id="2_l1py1"]
 [ext_resource type="Texture2D" uid="uid://bnqcov8qrllao" path="res://world/platformPack_tile004.png" id="3_aedeq"]
 [ext_resource type="PackedScene" uid="uid://rhho6c4dxbly" path="res://player/nut/nut.tscn" id="4_uktu2"]
@@ -31,6 +32,13 @@ sources/1 = SubResource("TileSetAtlasSource_ng3sv")
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_aelts")
+
+[node name="Background" type="TextureRect" parent="."]
+modulate = Color(0.486275, 0.490196, 0.458824, 1)
+custom_minimum_size = Vector2(1920, 1080)
+offset_right = 1920.0
+offset_bottom = 1080.0
+texture = ExtResource("2_agjtm")
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_051pk")
