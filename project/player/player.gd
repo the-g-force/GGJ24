@@ -163,9 +163,12 @@ func hit()->void:
 
 func stun() -> void:
 	_stunned = true
-	$AnimationPlayer.play("stunned")
-	await $AnimationPlayer.animation_finished
+	_state_machine.travel("stunned")
+	# Wait until the stunned animation is finished
+	while await $AnimationTree.animation_finished != "stunned":
+		pass
 	_stunned = false
+	_state_machine.travel("idle")
 
 
 func _drop_nuts()->void:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://hhgrn0x4be0o"]
+[gd_scene load_steps=24 format=3 uid="uid://hhgrn0x4be0o"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_fs2d3"]
 [ext_resource type="Texture2D" uid="uid://dahaux5tcbrky" path="res://player/chipmunk.png" id="2_xea5d"]
@@ -116,6 +116,9 @@ animation = &"idle"
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_7l44i"]
 animation = &"run"
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_i6fdy"]
+animation = &"stunned"
+
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_awpdl"]
 advance_mode = 2
 
@@ -123,12 +126,22 @@ advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_46b0g"]
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_djpmg"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_cgl08"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_udn2x"]
+switch_mode = 2
+advance_mode = 2
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_jmmvn"]
 states/idle/node = SubResource("AnimationNodeAnimation_lkhfy")
 states/idle/position = Vector2(464, 84)
 states/run/node = SubResource("AnimationNodeAnimation_7l44i")
 states/run/position = Vector2(548, 201)
-transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_awpdl"), "idle", "run", SubResource("AnimationNodeStateMachineTransition_nr6ym"), "run", "idle", SubResource("AnimationNodeStateMachineTransition_46b0g")]
+states/stunned/node = SubResource("AnimationNodeAnimation_i6fdy")
+states/stunned/position = Vector2(659, 99)
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_awpdl"), "idle", "run", SubResource("AnimationNodeStateMachineTransition_nr6ym"), "run", "idle", SubResource("AnimationNodeStateMachineTransition_46b0g"), "idle", "stunned", SubResource("AnimationNodeStateMachineTransition_djpmg"), "run", "stunned", SubResource("AnimationNodeStateMachineTransition_cgl08"), "stunned", "idle", SubResource("AnimationNodeStateMachineTransition_udn2x")]
 graph_offset = Vector2(-3, 16)
 
 [node name="Player" type="CharacterBody2D"]

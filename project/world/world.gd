@@ -8,6 +8,7 @@ extends Node2D
 
 var _players : Array[Player]
 var player_wins := {}
+var _pending_game_over := false
 
 func _ready():
 	for i in joined_player_ids:
@@ -29,8 +30,12 @@ func _add_player(id:int)->void:
 
 
 func _on_player_died(player:Player) -> void:
+	if _pending_game_over:
+		return
+	
 	_players.erase(player)
 	if _players.size() == 1:
+		_pending_game_over = true
 		var winner_id := _players[0].id
 		player_wins[winner_id] += 1
 		if player_wins[winner_id] == 3:
