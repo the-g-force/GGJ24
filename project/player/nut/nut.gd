@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-const SPEED := 800.0
+const SPEED := 600.0
 
 ## The player who shot this nut.
 ##
@@ -35,5 +35,9 @@ func _on_area_2d_body_exited(body):
 
 
 func pickup()->void:
-	print("pickuped")
 	queue_free()
+
+
+func _on_area_2d_body_entered(body:PhysicsBody2D)->void:
+	if body is Player and get_collision_layer_value(2):
+		body.hit()

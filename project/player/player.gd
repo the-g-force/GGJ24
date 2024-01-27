@@ -1,5 +1,5 @@
+class_name Player
 extends CharacterBody2D
-
 
 const SPEED = 300.0
 const JUMP_VELOCITY = -800.0
@@ -87,8 +87,6 @@ func _shoot()->void:
 	add_sibling(nut)
 	nut.global_position = _mouth.global_position
 	
-	print("Shot!")
-	
 	_shoot_cooldown_timer.start(shoot_cooldown_time)
 	await _shoot_cooldown_timer.timeout
 	_can_shoot = true
@@ -102,3 +100,7 @@ func _crouch()->void:
 
 func _draw()->void:
 	draw_rect(Rect2(-40, -160, 80, 160), Color.ORANGE)
+
+
+func hit()->void:
+	print("hit by nut")

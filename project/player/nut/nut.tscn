@@ -6,7 +6,7 @@
 radius = 15.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_e84qd"]
-radius = 15.0
+radius = 17.1172
 
 [node name="Nut" type="CharacterBody2D"]
 collision_layer = 4
@@ -23,4 +23,5 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_e84qd")
 
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
