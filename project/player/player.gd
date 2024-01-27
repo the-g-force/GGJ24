@@ -7,6 +7,7 @@ const SPEED = 300.0
 const JUMP_VELOCITY = -800.0
 
 @export var shoot_cooldown_time := 0.5
+@export var stun_duration := 2.5
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -14,6 +15,7 @@ var id : int
 var _can_shoot := true
 var _x_facing := 1
 var _stored_nuts := 0
+var _stunned := false
 
 @onready var _shoot_cooldown_timer : Timer = $ShootCooldownTimer
 @onready var _mouth : Node2D = $Mouth
@@ -24,21 +26,23 @@ func _physics_process(delta):
 	if not is_on_floor():
 		velocity.y += gravity * delta
 
-	if _is_jump_input_pressed() and is_on_floor():
-		velocity.y = JUMP_VELOCITY
-	
-	if _is_shoot_pressed() and _can_shoot and _stored_nuts > 0:
-		_shoot()
-	
-	if _is_crouch_pressed():
-		_crouch()
+	if not _stunned:
+		if _is_jump_input_pressed() and is_on_floor():
+			velocity.y = JUMP_VELOCITY
+		
+		if _is_shoot_pressed() and _can_shoot and _stored_nuts > 0:
+			_shoot()
+		
+		if _is_crouch_pressed():
+			_crouch()
 
-	var direction = _read_movement_input()
-	if abs(direction) > 0.1:
-		velocity.x = direction * SPEED
-		_x_facing = sign(direction)
-	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
+		var direction = _read_movement_input()
+		if abs(direction) > 0.1:
+			velocity.x = direction * SPEED
+			_x_facing = sign(direction)
+			$Sprite.scale.x = _x_facing
+		else:
+			velocity.x = move_toward(velocity.x, 0, SPEED)
 
 	move_and_slide()
 
@@ -103,9 +107,17 @@ func _crouch()->void:
 func hit()->void:
 	if _stored_nuts > 0:
 		_drop_nuts()
+		stun()
 	else:
 		died.emit()
 		queue_free()
+
+
+func stun() -> void:
+	_stunned = true
+	$AnimationPlayer.play("stunned")
+	await $AnimationPlayer.animation_finished
+	_stunned = false
 
 
 func _drop_nuts()->void:
@@ -115,3 +127,4 @@ func _drop_nuts()->void:
 		nut.direction = Vector2.ZERO
 		call_deferred("add_sibling", nut)
 		nut.global_position = _mouth.global_position
+	_stored_nuts = 0

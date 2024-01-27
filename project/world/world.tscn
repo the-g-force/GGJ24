@@ -42,13 +42,13 @@ layer_0/tile_data = PackedInt32Array(1048576, 1, 0, 1048577, 0, 0, 1048578, 0, 0
 position = Vector2(163, 246)
 
 [node name="SpawnPoint2" type="Marker2D" parent="SpawnPoints"]
-position = Vector2(1469, 994)
+position = Vector2(1729, 248)
 
 [node name="SpawnPoint3" type="Marker2D" parent="SpawnPoints"]
-position = Vector2(1210, 989)
+position = Vector2(174, 759)
 
 [node name="SpawnPoint4" type="Marker2D" parent="SpawnPoints"]
-position = Vector2(1704, 999)
+position = Vector2(1714, 760)
 
 [node name="Nut" parent="." instance=ExtResource("4_uktu2")]
 position = Vector2(282, 231)
