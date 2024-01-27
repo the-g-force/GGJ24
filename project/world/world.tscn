@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://cb1t8bqr7040n"]
+[gd_scene load_steps=8 format=3 uid="uid://cb1t8bqr7040n"]
 
 [ext_resource type="Script" path="res://world/world.gd" id="1_aelts"]
 [ext_resource type="Texture2D" uid="uid://dnyfo3tlpsi11" path="res://world/platformPack_tile001.png" id="2_l1py1"]
 [ext_resource type="Texture2D" uid="uid://bnqcov8qrllao" path="res://world/platformPack_tile004.png" id="3_aedeq"]
+[ext_resource type="PackedScene" uid="uid://rhho6c4dxbly" path="res://player/nut/nut.tscn" id="4_uktu2"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jv3ai"]
 texture = ExtResource("2_l1py1")
@@ -48,3 +49,15 @@ position = Vector2(159, 760)
 
 [node name="SpawnPoint4" type="Marker2D" parent="SpawnPoints"]
 position = Vector2(1752, 762)
+
+[node name="Nut" parent="." instance=ExtResource("4_uktu2")]
+position = Vector2(282, 231)
+
+[node name="Nut2" parent="." instance=ExtResource("4_uktu2")]
+position = Vector2(280, 750)
+
+[node name="Nut3" parent="." instance=ExtResource("4_uktu2")]
+position = Vector2(1635, 231)
+
+[node name="Nut4" parent="." instance=ExtResource("4_uktu2")]
+position = Vector2(1620, 738)

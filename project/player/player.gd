@@ -58,7 +58,7 @@ func _is_shoot_pressed() -> bool:
 
 func _is_crouch_pressed()->bool:
 	if id == 0:
-		if Input.is_key_pressed(KEY_DOWN):
+		if Input.is_key_pressed(KEY_S):
 			return true
 	return Input.get_joy_axis(id, JOY_AXIS_LEFT_Y) < -0.1
 
