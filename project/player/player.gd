@@ -99,4 +99,16 @@ func _crouch()->void:
 
 
 func hit()->void:
-	print("hit by nut")
+	if _stored_nuts > 0:
+		_drop_nuts()
+	else:
+		print("KayOed")
+
+
+func _drop_nuts()->void:
+	for i in _stored_nuts:
+		var nut := preload("res://player/nut/nut.tscn").instantiate()
+		nut.shooter = self
+		nut.direction = Vector2.ZERO
+		call_deferred("add_sibling", nut)
+		nut.global_position = _mouth.global_position
