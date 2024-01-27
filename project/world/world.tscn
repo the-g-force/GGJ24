@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://cb1t8bqr7040n"]
+[gd_scene load_steps=9 format=3 uid="uid://cb1t8bqr7040n"]
 
 [ext_resource type="Script" path="res://world/world.gd" id="1_aelts"]
 [ext_resource type="Texture2D" uid="uid://dnyfo3tlpsi11" path="res://world/platformPack_tile001.png" id="2_l1py1"]
 [ext_resource type="Texture2D" uid="uid://bnqcov8qrllao" path="res://world/platformPack_tile004.png" id="3_aedeq"]
 [ext_resource type="PackedScene" uid="uid://rhho6c4dxbly" path="res://player/nut/nut.tscn" id="4_uktu2"]
+[ext_resource type="PackedScene" uid="uid://cpxsloc30cse5" path="res://world/round_over_screen.tscn" id="5_63ovj"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jv3ai"]
 texture = ExtResource("2_l1py1")
@@ -69,3 +70,16 @@ offset_top = 539.0
 offset_right = 1007.0
 offset_bottom = 562.0
 text = "Round Over!"
+horizontal_alignment = 1
+
+[node name="RoundOverScreen" parent="." instance=ExtResource("5_63ovj")]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 720.0
+offset_top = 405.0
+offset_right = 1200.0
+offset_bottom = 675.0

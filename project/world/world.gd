@@ -40,7 +40,8 @@ func _on_player_died(player:Player) -> void:
 
 
 func _end_round()->void:
-	$GameOverLabel.visible = true
+	$RoundOverScreen.show()
+	$RoundOverScreen.update_wins(player_wins)
 	await get_tree().create_timer(seconds_between_rounds).timeout
 	_load_new_round()
 
