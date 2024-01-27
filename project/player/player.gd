@@ -1,6 +1,8 @@
 class_name Player
 extends CharacterBody2D
 
+signal died
+
 const SPEED = 300.0
 const JUMP_VELOCITY = -800.0
 
@@ -102,7 +104,8 @@ func hit()->void:
 	if _stored_nuts > 0:
 		_drop_nuts()
 	else:
-		print("KayOed")
+		died.emit()
+		queue_free()
 
 
 func _drop_nuts()->void:
