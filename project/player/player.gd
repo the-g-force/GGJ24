@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 
 const SPEED = 300.0
-const JUMP_VELOCITY = -400.0
+const JUMP_VELOCITY = -800.0
 
 @export var shoot_cooldown_time := 0.5
 
@@ -51,5 +51,4 @@ func _shoot()->void:
 
 
 func _draw()->void:
-	draw_circle(Vector2(0, -22.5), 10, Color.ORANGE)
-	draw_rect(Rect2(Vector2(-5, -22.5), Vector2(10, 22.5)), Color.ORANGE)
+	draw_rect(Rect2(-40, -160, 80, 160), Color.ORANGE)

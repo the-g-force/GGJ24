@@ -14,4 +14,5 @@ func _add_player(id:int)->void:
 	
 	var player := preload("res://player/player.tscn").instantiate()
 	add_child(player)
+	player.global_position = $SpawnPoint.global_position
 	player.id = id
