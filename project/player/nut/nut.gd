@@ -23,11 +23,6 @@ func _physics_process(delta:float)->void:
 	move_and_slide()
 
 
-func _draw():
-	var radius :float = $CollisionShape2D.shape.radius
-	draw_circle(Vector2.ZERO, radius, Color.SADDLE_BROWN)
-
-
 func _on_area_2d_body_exited(body):
 	# Once the area passes out of the shooter, turn on collision with players.
 	if body==shooter:
