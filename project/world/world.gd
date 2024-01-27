@@ -1,23 +1,14 @@
 extends Node2D
 
-const MAX_PLAYER_INDEX := 3
+@export var players := 4
 
 var _players_joined : Array[int] = []
 
 @onready var _spawn_point_parent := $SpawnPoints
 
-func _input(event:InputEvent)->void:
-	if event is InputEventKey\
-		and event.is_pressed()\
-		and event.keycode == KEY_SPACE\
-		and not _players_joined.has(0):
-		_add_player(0)
-	
-	if event is InputEventJoypadButton and event.is_pressed():
-		var player_index := event.device
-		if player_index <= MAX_PLAYER_INDEX \
-			and not _players_joined.has(player_index):
-			_add_player(player_index)
+func _ready():
+	for i in players:
+		_add_player(i)
 
 
 func _add_player(id:int)->void:
