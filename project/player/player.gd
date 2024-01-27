@@ -35,6 +35,7 @@ var _crouching := false:
 @onready var _standing_collision_shape := $CollisionShape2D
 @onready var _crouching_sprite := $SpriteHolder/CrouchingSprite
 @onready var _crouching_collision_shape := $CrouchingCollisionShape2D
+@onready var state_machine = $AnimationTree["parameters/playback"]
 
 
 func _physics_process(delta):
@@ -59,8 +60,11 @@ func _physics_process(delta):
 				velocity.x = direction * SPEED
 				_x_facing = sign(direction)
 				_sprite_holder.scale.x = _x_facing
+				state_machine.travel("run")
 			else:
 				velocity.x = move_toward(velocity.x, 0, SPEED)
+				if velocity.x == 0:
+					state_machine.travel("idle")
 
 	move_and_slide()
 
