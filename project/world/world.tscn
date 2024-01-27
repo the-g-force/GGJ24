@@ -69,7 +69,6 @@ offset_left = 915.0
 offset_top = 539.0
 offset_right = 1007.0
 offset_bottom = 562.0
-text = "Round Over!"
 horizontal_alignment = 1
 
 [node name="RoundOverScreen" parent="." instance=ExtResource("5_63ovj")]

@@ -58,5 +58,5 @@ func _end_game(winner_id:int)->void:
 	$GameOverLabel.visible = true
 	$GameOverLabel.text = "Game Over! Chipmunk %s won!" % winner_id
 	await get_tree().create_timer(seconds_between_rounds).timeout
-	player_wins = {}
-	_load_new_round()
+	add_sibling(load("res://start/start_screen.tscn").instantiate())
+	queue_free()
