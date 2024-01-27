@@ -46,14 +46,18 @@ func _physics_process(delta):
 		if _is_jump_input_pressed() and is_on_floor():
 			velocity.y = JUMP_VELOCITY
 		
-		if _is_shoot_pressed() and _can_shoot and _stored_nuts > 0:
-			_shoot()
-		
 		if _is_crouch_pressed() and is_on_floor():
 			_crouch()
 			velocity.x = 0
 		else:
 			_crouching = false
+			
+				
+		if _is_shoot_pressed()\
+			and _can_shoot\
+			and _stored_nuts > 0\
+			and not _crouching:
+			_shoot()
 
 		if not _crouching:
 			var direction = _read_movement_input()
