@@ -19,10 +19,22 @@ var _can_shoot := true
 var _x_facing := 1
 var _stored_nuts := 0
 var _stunned := false
+var _crouching := false:
+	set(value):
+		_crouching = value
+		_standing_sprite.visible = not _crouching
+		_standing_collision_shape.set_deferred("disabled", _crouching)
+		_crouching_sprite.visible = _crouching
+		_crouching_collision_shape.set_deferred("disabled", not _crouching)
 
 @onready var _shoot_cooldown_timer : Timer = $ShootCooldownTimer
 @onready var _mouth : Node2D = $Mouth
 @onready var _nut_pickup_area : Area2D = $NutPickupArea
+@onready var _sprite_holder := $SpriteHolder
+@onready var _standing_sprite := $SpriteHolder/StandingSprite
+@onready var _standing_collision_shape := $CollisionShape2D
+@onready var _crouching_sprite := $SpriteHolder/CrouchingSprite
+@onready var _crouching_collision_shape := $CrouchingCollisionShape2D
 
 
 func _physics_process(delta):
@@ -36,14 +48,16 @@ func _physics_process(delta):
 		if _is_shoot_pressed() and _can_shoot and _stored_nuts > 0:
 			_shoot()
 		
-		if _is_crouch_pressed():
+		if _is_crouch_pressed() and is_on_floor():
 			_crouch()
+		else:
+			_crouching = false
 
 		var direction = _read_movement_input()
 		if abs(direction) > 0.1:
 			velocity.x = direction * SPEED
 			_x_facing = sign(direction)
-			$Sprite.scale.x = _x_facing
+			_sprite_holder.scale.x = _x_facing
 		else:
 			velocity.x = move_toward(velocity.x, 0, SPEED)
 
@@ -102,12 +116,16 @@ func _shoot()->void:
 
 
 func _crouch()->void:
+	_crouching = true
 	for nut in _nut_pickup_area.get_overlapping_bodies():
 		nut.pickup()
 		_stored_nuts += 1
 
 
 func hit()->void:
+	# Always stand up when hit
+	_crouching = false
+	
 	if _stored_nuts > 0:
 		_drop_nuts()
 		stun()
