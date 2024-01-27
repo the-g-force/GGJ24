@@ -42,6 +42,10 @@ func _on_player_died(player:Player) -> void:
 func _end_round()->void:
 	$GameOverLabel.visible = true
 	await get_tree().create_timer(seconds_between_rounds).timeout
+	_load_new_round()
+
+
+func _load_new_round()->void:
 	var new_scene = load("res://world/world.tscn").instantiate()
 	new_scene.joined_player_ids = joined_player_ids
 	new_scene.player_wins = player_wins
@@ -51,4 +55,7 @@ func _end_round()->void:
 
 func _end_game(winner_id:int)->void:
 	$GameOverLabel.visible = true
-	$GameOverLabel.text = "Game Over! Chipmunk %s won! \n The game will never end now" % winner_id
+	$GameOverLabel.text = "Game Over! Chipmunk %s won!" % winner_id
+	await get_tree().create_timer(seconds_between_rounds).timeout
+	player_wins = {}
+	_load_new_round()
