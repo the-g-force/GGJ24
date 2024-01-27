@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://hhgrn0x4be0o"]
+[gd_scene load_steps=29 format=3 uid="uid://hhgrn0x4be0o"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_fs2d3"]
 [ext_resource type="Texture2D" uid="uid://dahaux5tcbrky" path="res://player/chipmunk.png" id="2_xea5d"]
@@ -11,6 +11,9 @@ size = Vector2(80, 160)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_aodb6"]
 radius = 50.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7rnk8"]
+size = Vector2(80, 80)
 
 [sub_resource type="Animation" id="Animation_r4yln"]
 length = 0.001
@@ -45,6 +48,30 @@ tracks/2/path = NodePath("SpriteHolder/StandingSprite/Leg_Left:rotation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("PlayerIdLabel:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("SpriteHolder:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
@@ -99,16 +126,45 @@ tracks/0/keys = {
 "values": [0.0, -0.0872665, 0.0872665, 0.0, -0.0872665, 0.0]
 }
 
+[sub_resource type="Animation" id="Animation_4vghp"]
+resource_name = "death"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerIdLabel:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SpriteHolder:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, -1.5708]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_gdp4s"]
 _data = {
 "RESET": SubResource("Animation_r4yln"),
+"death": SubResource("Animation_4vghp"),
 "idle": SubResource("Animation_d1hex"),
 "run": SubResource("Animation_qmymf"),
 "stunned": SubResource("Animation_k0sqh")
 }
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_7rnk8"]
-size = Vector2(80, 80)
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_4x40y"]
+animation = &"death"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_lkhfy"]
 animation = &"idle"
@@ -134,14 +190,23 @@ advance_mode = 2
 switch_mode = 2
 advance_mode = 2
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_u70ae"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ibbx2"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_twxih"]
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_jmmvn"]
+states/End/position = Vector2(215, 254)
+states/death/node = SubResource("AnimationNodeAnimation_4x40y")
+states/death/position = Vector2(351, 184)
 states/idle/node = SubResource("AnimationNodeAnimation_lkhfy")
 states/idle/position = Vector2(464, 84)
 states/run/node = SubResource("AnimationNodeAnimation_7l44i")
-states/run/position = Vector2(548, 201)
+states/run/position = Vector2(524, 350)
 states/stunned/node = SubResource("AnimationNodeAnimation_i6fdy")
-states/stunned/position = Vector2(659, 99)
-transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_awpdl"), "idle", "run", SubResource("AnimationNodeStateMachineTransition_nr6ym"), "run", "idle", SubResource("AnimationNodeStateMachineTransition_46b0g"), "idle", "stunned", SubResource("AnimationNodeStateMachineTransition_djpmg"), "run", "stunned", SubResource("AnimationNodeStateMachineTransition_cgl08"), "stunned", "idle", SubResource("AnimationNodeStateMachineTransition_udn2x")]
+states/stunned/position = Vector2(708, 131)
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_awpdl"), "idle", "run", SubResource("AnimationNodeStateMachineTransition_nr6ym"), "run", "idle", SubResource("AnimationNodeStateMachineTransition_46b0g"), "idle", "stunned", SubResource("AnimationNodeStateMachineTransition_djpmg"), "run", "stunned", SubResource("AnimationNodeStateMachineTransition_cgl08"), "stunned", "idle", SubResource("AnimationNodeStateMachineTransition_udn2x"), "idle", "death", SubResource("AnimationNodeStateMachineTransition_u70ae"), "run", "death", SubResource("AnimationNodeStateMachineTransition_ibbx2"), "stunned", "death", SubResource("AnimationNodeStateMachineTransition_twxih")]
 graph_offset = Vector2(-3, 16)
 
 [node name="Player" type="CharacterBody2D"]
@@ -165,11 +230,6 @@ monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="NutPickupArea"]
 shape = SubResource("CircleShape2D_aodb6")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_gdp4s")
-}
 
 [node name="CrouchingCollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -40)
@@ -224,6 +284,11 @@ libraries = {
 }
 tree_root = SubResource("AnimationNodeStateMachine_jmmvn")
 anim_player = NodePath("../AnimationPlayer")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_gdp4s")
+}
 
 [node name="PlayerIdLabel" type="Label" parent="."]
 offset_left = -19.0

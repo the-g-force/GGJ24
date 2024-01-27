@@ -32,6 +32,7 @@ var _crouching := false:
 		_standing_collision_shape.set_deferred("disabled", _crouching)
 		_crouching_sprite.visible = _crouching
 		_crouching_collision_shape.set_deferred("disabled", not _crouching)
+var _dead := false
 
 @onready var _shoot_cooldown_timer : Timer = $ShootCooldownTimer
 @onready var _mouth : Node2D = $Mouth
@@ -58,7 +59,7 @@ func _physics_process(delta):
 	if not is_on_floor():
 		velocity.y += gravity * delta
 
-	if not _stunned:
+	if not _stunned and not _dead:
 		if _is_jump_input_pressed() and is_on_floor():
 			velocity.y = JUMP_VELOCITY
 		
@@ -150,6 +151,9 @@ func _crouch()->void:
 
 
 func hit()->void:
+	if _dead:
+		return
+	
 	# Always stand up and stop when hit
 	_crouching = false
 	velocity.x = 0
@@ -159,7 +163,8 @@ func hit()->void:
 		stun()
 	else:
 		died.emit()
-		queue_free()
+		_state_machine.travel("death")
+		_dead = true
 
 
 func stun() -> void:
