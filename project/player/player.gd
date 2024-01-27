@@ -10,6 +10,7 @@ const JUMP_VELOCITY = -400.0
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var id : int
 var _can_shoot := true
+var _x_facing := 1
 
 @onready var _shoot_cooldown_timer : Timer = $ShootCooldownTimer
 
@@ -26,8 +27,9 @@ func _physics_process(delta):
 		_shoot()
 
 	var direction = Input.get_joy_axis(id, JOY_AXIS_LEFT_X)
-	if direction:
+	if abs(direction) > 0.1:
 		velocity.x = direction * SPEED
+		_x_facing = sign(direction)
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 
@@ -41,7 +43,7 @@ func _shoot()->void:
 	var nut := preload("res://player/nut/nut.tscn").instantiate()
 	add_sibling(nut)
 	nut.global_position = global_position
-	nut.apply_central_impulse(Vector2.RIGHT.rotated(-PI/8) * 500)
+	nut.apply_central_impulse(Vector2(_x_facing, 0).rotated(-PI/8 * _x_facing) * 500)
 	
 	_shoot_cooldown_timer.start(shoot_cooldown_time)
 	await _shoot_cooldown_timer.timeout
