@@ -70,9 +70,9 @@ func _shoot()->void:
 	
 	var nut := preload("res://player/nut/nut.tscn").instantiate()
 	nut.shooter = self
+	nut.direction = Vector2(_x_facing, 0).rotated(-PI/8 * _x_facing)
 	add_sibling(nut)
 	nut.global_position = _mouth.global_position
-	nut.apply_central_impulse(Vector2(_x_facing, 0).rotated(-PI/8 * _x_facing) * 500)
 	
 	print("Shot!")
 	

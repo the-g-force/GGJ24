@@ -8,7 +8,7 @@ radius = 15.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_e84qd"]
 radius = 15.0
 
-[node name="Nut" type="RigidBody2D"]
+[node name="Nut" type="CharacterBody2D"]
 collision_layer = 4
 collision_mask = 5
 script = ExtResource("1_2klto")
