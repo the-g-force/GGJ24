@@ -98,9 +98,5 @@ func _crouch()->void:
 		_stored_nuts += 1
 
 
-func _draw()->void:
-	draw_rect(Rect2(-40, -160, 80, 160), Color.ORANGE)
-
-
 func hit()->void:
 	print("hit by nut")

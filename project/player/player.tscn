@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://hhgrn0x4be0o"]
+[gd_scene load_steps=5 format=3 uid="uid://hhgrn0x4be0o"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_fs2d3"]
+[ext_resource type="Texture2D" uid="uid://c5tovbtg31aly" path="res://player/chipmunk.png" id="2_xea5d"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yeyjv"]
 size = Vector2(80, 160)
@@ -30,3 +31,7 @@ monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="NutPickupArea"]
 shape = SubResource("CircleShape2D_aodb6")
+
+[node name="Chipmunk" type="Sprite2D" parent="."]
+position = Vector2(0, -80)
+texture = ExtResource("2_xea5d")
