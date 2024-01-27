@@ -53,13 +53,14 @@ func _physics_process(delta):
 		else:
 			_crouching = false
 
-		var direction = _read_movement_input()
-		if abs(direction) > 0.1:
-			velocity.x = direction * SPEED
-			_x_facing = sign(direction)
-			_sprite_holder.scale.x = _x_facing
-		else:
-			velocity.x = move_toward(velocity.x, 0, SPEED)
+		if not _crouching:
+			var direction = _read_movement_input()
+			if abs(direction) > 0.1:
+				velocity.x = direction * SPEED
+				_x_facing = sign(direction)
+				_sprite_holder.scale.x = _x_facing
+			else:
+				velocity.x = move_toward(velocity.x, 0, SPEED)
 
 	move_and_slide()
 
