@@ -1,16 +1,15 @@
 extends Node2D
 
 ## The number of players that start in this round of the game
-@export var player_count := 4
-
 @export var seconds_between_rounds := 3.0
 
 @onready var _spawn_point_parent := $SpawnPoints
 
+var joined_player_ids : Array[int]
 var _players : Array[Player]
 
 func _ready():
-	for i in player_count:
+	for i in joined_player_ids:
 		_add_player(i)
 
 
@@ -30,6 +29,6 @@ func _on_player_died(player:Player) -> void:
 		$GameOverLabel.visible = true
 		await get_tree().create_timer(seconds_between_rounds).timeout
 		var new_scene = load("res://world/world.tscn").instantiate()
-		new_scene.player_count = player_count
+		new_scene.joined_player_ids = joined_player_ids
 		add_sibling(new_scene)
 		queue_free()
