@@ -150,8 +150,9 @@ func _crouch()->void:
 
 
 func hit()->void:
-	# Always stand up when hit
+	# Always stand up and stop when hit
 	_crouching = false
+	velocity.x = 0
 	
 	if _stored_nuts > 0:
 		_drop_nuts()
