@@ -26,27 +26,48 @@ text = "Round Over"
 label_settings = SubResource("LabelSettings_fipf4")
 horizontal_alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="GridContainer" type="GridContainer" parent="."]
 layout_mode = 2
+size_flags_horizontal = 4
 size_flags_vertical = 4
-alignment = 1
+columns = 2
 
-[node name="Player0Label" type="Label" parent="VBoxContainer"]
+[node name="Player0Label" type="Label" parent="GridContainer"]
 layout_mode = 2
 label_settings = SubResource("LabelSettings_qbwle")
 horizontal_alignment = 1
 
-[node name="Player1Label" type="Label" parent="VBoxContainer"]
+[node name="Player0Score" type="Label" parent="GridContainer"]
 layout_mode = 2
 label_settings = SubResource("LabelSettings_qbwle")
 horizontal_alignment = 1
 
-[node name="Player2Label" type="Label" parent="VBoxContainer"]
+[node name="Player1Label" type="Label" parent="GridContainer"]
 layout_mode = 2
 label_settings = SubResource("LabelSettings_qbwle")
 horizontal_alignment = 1
 
-[node name="Player3Label" type="Label" parent="VBoxContainer"]
+[node name="Player1Score" type="Label" parent="GridContainer"]
+layout_mode = 2
+label_settings = SubResource("LabelSettings_qbwle")
+horizontal_alignment = 1
+
+[node name="Player2Label" type="Label" parent="GridContainer"]
+layout_mode = 2
+label_settings = SubResource("LabelSettings_qbwle")
+horizontal_alignment = 1
+
+[node name="Player2Score" type="Label" parent="GridContainer"]
+layout_mode = 2
+label_settings = SubResource("LabelSettings_qbwle")
+horizontal_alignment = 1
+
+[node name="Player3Label" type="Label" parent="GridContainer"]
+layout_mode = 2
+label_settings = SubResource("LabelSettings_qbwle")
+horizontal_alignment = 1
+
+[node name="Player3Score" type="Label" parent="GridContainer"]
 layout_mode = 2
 label_settings = SubResource("LabelSettings_qbwle")
 horizontal_alignment = 1
