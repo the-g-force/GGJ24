@@ -38,6 +38,10 @@ var _crouching := false:
 @onready var state_machine = $AnimationTree["parameters/playback"]
 
 
+func _ready():
+	$PlayerIdLabel.text = "P%d" % (id+1)
+
+
 func _physics_process(delta):
 	if not is_on_floor():
 		velocity.y += gravity * delta

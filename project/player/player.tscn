@@ -50,6 +50,9 @@ tracks/2/keys = {
 "values": [0.0]
 }
 
+[sub_resource type="Animation" id="Animation_d1hex"]
+resource_name = "idle"
+
 [sub_resource type="Animation" id="Animation_qmymf"]
 resource_name = "run"
 length = 0.4
@@ -95,9 +98,6 @@ tracks/0/keys = {
 "values": [0.0, -0.0872665, 0.0872665, 0.0, -0.0872665, 0.0]
 }
 
-[sub_resource type="Animation" id="Animation_d1hex"]
-resource_name = "idle"
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_gdp4s"]
 _data = {
 "RESET": SubResource("Animation_r4yln"),
@@ -132,7 +132,6 @@ graph_offset = Vector2(-3, 16)
 
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
-collision_mask = 3
 script = ExtResource("1_fs2d3")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -193,3 +192,11 @@ libraries = {
 }
 tree_root = SubResource("AnimationNodeStateMachine_jmmvn")
 anim_player = NodePath("../AnimationPlayer")
+
+[node name="PlayerIdLabel" type="Label" parent="."]
+offset_left = -19.0
+offset_top = -184.0
+offset_right = 21.0
+offset_bottom = -161.0
+text = "N"
+horizontal_alignment = 1

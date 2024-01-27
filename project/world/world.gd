@@ -15,10 +15,10 @@ func _ready():
 
 func _add_player(id:int)->void:
 	var player := preload("res://player/player.tscn").instantiate()
+	player.id = id
 	add_child(player)
 	var spawn_point := _spawn_point_parent.get_children()[id]
 	player.global_position = spawn_point.global_position
-	player.id = id
 	_players.append(player)
 	player.died.connect(_on_player_died.bind(player))
 
