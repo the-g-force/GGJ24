@@ -32,3 +32,8 @@ func _on_area_2d_body_exited(body):
 	# Once the area passes out of the shooter, turn on collision with players.
 	if body==shooter:
 		set_collision_layer_value(2, true)
+
+
+func pickup()->void:
+	print("pickuped")
+	queue_free()

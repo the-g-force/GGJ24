@@ -11,9 +11,11 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var id : int
 var _can_shoot := true
 var _x_facing := 1
+var _stored_nuts := 0
 
 @onready var _shoot_cooldown_timer : Timer = $ShootCooldownTimer
 @onready var _mouth : Node2D = $Mouth
+@onready var _nut_pickup_area : Area2D = $NutPickupArea
 
 
 func _physics_process(delta):
@@ -23,8 +25,11 @@ func _physics_process(delta):
 	if _is_jump_input_pressed() and is_on_floor():
 		velocity.y = JUMP_VELOCITY
 	
-	if _is_shoot_pressed() and _can_shoot:
+	if _is_shoot_pressed() and _can_shoot and _stored_nuts > 0:
 		_shoot()
+	
+	if _is_crouch_pressed():
+		_crouch()
 
 	var direction = _read_movement_input()
 	if abs(direction) > 0.1:
@@ -51,6 +56,13 @@ func _is_shoot_pressed() -> bool:
 	return Input.is_joy_button_pressed(id, JOY_BUTTON_X)
 
 
+func _is_crouch_pressed()->bool:
+	if id == 0:
+		if Input.is_key_pressed(KEY_DOWN):
+			return true
+	return Input.get_joy_axis(id, JOY_AXIS_LEFT_Y) < -0.1
+
+
 func _read_movement_input() -> float:
 	# Player zero can use the keyboard (for speed of testing)
 	if id ==0:
@@ -65,8 +77,9 @@ func _read_movement_input() -> float:
 
 
 func _shoot()->void:
-	assert(_can_shoot)
+	assert(_can_shoot and _stored_nuts > 0)
 	_can_shoot = false
+	_stored_nuts -= 1
 	
 	var nut := preload("res://player/nut/nut.tscn").instantiate()
 	nut.shooter = self
@@ -79,6 +92,12 @@ func _shoot()->void:
 	_shoot_cooldown_timer.start(shoot_cooldown_time)
 	await _shoot_cooldown_timer.timeout
 	_can_shoot = true
+
+
+func _crouch()->void:
+	for nut in _nut_pickup_area.get_overlapping_bodies():
+		nut.pickup()
+		_stored_nuts += 1
 
 
 func _draw()->void:
