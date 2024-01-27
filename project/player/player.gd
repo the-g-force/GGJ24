@@ -9,6 +9,9 @@ const JUMP_VELOCITY = -800.0
 @export var shoot_cooldown_time := 0.5
 @export var stun_duration := 2.5
 
+## How much along the axis counts as pressing down
+@export var pickup_axis_threshold := 0.1
+
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var id : int
@@ -66,7 +69,7 @@ func _is_crouch_pressed()->bool:
 	if id == 0:
 		if Input.is_key_pressed(KEY_S):
 			return true
-	return Input.get_joy_axis(id, JOY_AXIS_LEFT_Y) < -0.1
+	return Input.get_joy_axis(id, JOY_AXIS_LEFT_Y) > pickup_axis_threshold
 
 
 func _read_movement_input() -> float:
