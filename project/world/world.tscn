@@ -1,40 +1,50 @@
-[gd_scene load_steps=5 format=3 uid="uid://cb1t8bqr7040n"]
+[gd_scene load_steps=7 format=3 uid="uid://cb1t8bqr7040n"]
 
 [ext_resource type="Script" path="res://world/world.gd" id="1_aelts"]
-[ext_resource type="Texture2D" uid="uid://dnk23qnkjt15t" path="res://world/tile_center.png" id="2_tlkd3"]
+[ext_resource type="Texture2D" uid="uid://dnyfo3tlpsi11" path="res://world/platformPack_tile001.png" id="2_l1py1"]
+[ext_resource type="Texture2D" uid="uid://bnqcov8qrllao" path="res://world/platformPack_tile004.png" id="3_aedeq"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_iuwsw"]
-texture = ExtResource("2_tlkd3")
-texture_region_size = Vector2i(80, 80)
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jv3ai"]
+texture = ExtResource("2_l1py1")
+texture_region_size = Vector2i(64, 64)
 0:0/0 = 0
 0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 0:0/0/physics_layer_0/angular_velocity = 0.0
-0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-40, -40, 40, -40, 40, 40, -40, 40)
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
 
-[sub_resource type="TileSet" id="TileSet_qknjb"]
-tile_size = Vector2i(80, 80)
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ng3sv"]
+texture = ExtResource("3_aedeq")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
+
+[sub_resource type="TileSet" id="TileSet_051pk"]
+tile_size = Vector2i(64, 64)
 physics_layer_0/collision_layer = 1
 physics_layer_0/collision_mask = 0
-sources/0 = SubResource("TileSetAtlasSource_iuwsw")
+sources/0 = SubResource("TileSetAtlasSource_jv3ai")
+sources/1 = SubResource("TileSetAtlasSource_ng3sv")
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_aelts")
 
 [node name="TileMap" type="TileMap" parent="."]
-tile_set = SubResource("TileSet_qknjb")
+tile_set = SubResource("TileSet_051pk")
 format = 2
-layer_0/tile_data = PackedInt32Array(786432, 0, 0, 786433, 0, 0, 786434, 0, 0, 786435, 0, 0, 786436, 0, 0, 786437, 0, 0, 786438, 0, 0, 786439, 0, 0, 786440, 0, 0, 786441, 0, 0, 786442, 0, 0, 786443, 0, 0, 786444, 0, 0, 786445, 0, 0, 786446, 0, 0, 786447, 0, 0, 786448, 0, 0, 786449, 0, 0, 786450, 0, 0, 786451, 0, 0, 786452, 0, 0, 786453, 0, 0, 786454, 0, 0, 786455, 0, 0, 0, 0, 0, 1, 0, 0, 2, 0, 0, 3, 0, 0, 4, 0, 0, 5, 0, 0, 6, 0, 0, 7, 0, 0, 8, 0, 0, 9, 0, 0, 10, 0, 0, 11, 0, 0, 12, 0, 0, 13, 0, 0, 14, 0, 0, 15, 0, 0, 16, 0, 0, 17, 0, 0, 18, 0, 0, 19, 0, 0, 20, 0, 0, 21, 0, 0, 22, 0, 0, 23, 0, 0, 262144, 0, 0, 524288, 0, 0, 524289, 0, 0, 524290, 0, 0, 262145, 0, 0, 262146, 0, 0, 262150, 0, 0, 262151, 0, 0, 262152, 0, 0, 524294, 0, 0, 524295, 0, 0, 524296, 0, 0, 262167, 0, 0, 262166, 0, 0, 262165, 0, 0, 262161, 0, 0, 262160, 0, 0, 262159, 0, 0, 524303, 0, 0, 524304, 0, 0, 524305, 0, 0, 524309, 0, 0, 524310, 0, 0, 524311, 0, 0, 720896, 0, 0, 655360, 0, 0, 589824, 0, 0, 458752, 0, 0, 393216, 0, 0, 327680, 0, 0, 196608, 0, 0, 131072, 0, 0, 65536, 0, 0, 65559, 0, 0, 131095, 0, 0, 196631, 0, 0, 393239, 0, 0, 458775, 0, 0, 327703, 0, 0, 589847, 0, 0, 655383, 0, 0, 720919, 0, 0)
+layer_0/tile_data = PackedInt32Array(1048576, 1, 0, 1048577, 0, 0, 1048578, 0, 0, 1048579, 0, 0, 1048580, 0, 0, 1048581, 0, 0, 1048582, 0, 0, 1048583, 0, 0, 1048584, 0, 0, 1048585, 0, 0, 1048586, 0, 0, 1048587, 0, 0, 1048588, 0, 0, 1048589, 0, 0, 1048590, 0, 0, 1048591, 0, 0, 1048592, 0, 0, 1048593, 0, 0, 1048594, 0, 0, 1048595, 0, 0, 1048596, 0, 0, 1048597, 0, 0, 1048598, 0, 0, 1048599, 0, 0, 1048600, 0, 0, 1048601, 0, 0, 1048602, 0, 0, 1048603, 0, 0, 1048604, 0, 0, 1048605, 1, 0, 983040, 1, 0, 917504, 1, 0, 851968, 1, 0, 786432, 1, 0, 720896, 1, 0, 655360, 1, 0, 589824, 1, 0, 524288, 1, 0, 458752, 1, 0, 393216, 1, 0, 327680, 1, 0, 262144, 1, 0, 196608, 1, 0, 131072, 1, 0, 65536, 1, 0, 983069, 1, 0, 917533, 1, 0, 851997, 1, 0, 720925, 1, 0, 655389, 1, 0, 786461, 1, 0, 589853, 1, 0, 524317, 1, 0, 458781, 1, 0, 393245, 1, 0, 327709, 1, 0, 262173, 1, 0, 196637, 1, 0, 131101, 1, 0, 65565, 1, 0, 29, 1, 0, 0, 1, 0, 786433, 0, 0, 786434, 0, 0, 786435, 0, 0, 786436, 0, 0, 524289, 0, 0, 524290, 0, 0, 524291, 0, 0, 524292, 0, 0, 262145, 0, 0, 262146, 0, 0, 262147, 0, 0, 262148, 0, 0, 262152, 0, 0, 262153, 0, 0, 262154, 0, 0, 262155, 0, 0, 524296, 0, 0, 524297, 0, 0, 524298, 0, 0, 524299, 0, 0, 786440, 0, 0, 786441, 0, 0, 786442, 0, 0, 786443, 0, 0, 262169, 0, 0, 262170, 0, 0, 262171, 0, 0, 262172, 0, 0, 786457, 0, 0, 786458, 0, 0, 786459, 0, 0, 786460, 0, 0, 1, 1, 0, 2, 1, 0, 3, 1, 0, 4, 1, 0, 5, 1, 0, 6, 1, 0, 7, 1, 0, 8, 1, 0, 9, 1, 0, 10, 1, 0, 11, 1, 0, 12, 1, 0, 13, 1, 0, 14, 1, 0, 15, 1, 0, 16, 1, 0, 17, 1, 0, 18, 1, 0, 19, 1, 0, 20, 1, 0, 21, 1, 0, 22, 1, 0, 23, 1, 0, 24, 1, 0, 25, 1, 0, 26, 1, 0, 27, 1, 0, 28, 1, 0)
 
 [node name="SpawnPoints" type="Node" parent="."]
 
 [node name="SpawnPoint" type="Marker2D" parent="SpawnPoints"]
-position = Vector2(150, 317)
+position = Vector2(163, 246)
 
 [node name="SpawnPoint2" type="Marker2D" parent="SpawnPoints"]
-position = Vector2(1741, 317)
+position = Vector2(1754, 246)
 
 [node name="SpawnPoint3" type="Marker2D" parent="SpawnPoints"]
-position = Vector2(156, 637)
+position = Vector2(159, 760)
 
 [node name="SpawnPoint4" type="Marker2D" parent="SpawnPoints"]
-position = Vector2(1749, 639)
+position = Vector2(1752, 762)
