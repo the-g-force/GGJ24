@@ -20,13 +20,13 @@ func _physics_process(delta):
 	if not is_on_floor():
 		velocity.y += gravity * delta
 
-	if Input.is_joy_button_pressed(id, JOY_BUTTON_A) and is_on_floor():
+	if _is_jump_input_pressed() and is_on_floor():
 		velocity.y = JUMP_VELOCITY
 	
 	if Input.is_joy_button_pressed(id, JOY_BUTTON_X) and _can_shoot:
 		_shoot()
 
-	var direction = Input.get_joy_axis(id, JOY_AXIS_LEFT_X)
+	var direction = _read_movement_input()
 	if abs(direction) > 0.1:
 		velocity.x = direction * SPEED
 		_x_facing = sign(direction)
@@ -34,6 +34,27 @@ func _physics_process(delta):
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 
 	move_and_slide()
+
+
+func _is_jump_input_pressed() -> bool:
+	# Player 0 can use the keyboard for testing
+	if id == 0:
+		if Input.is_key_pressed(KEY_SPACE):
+			return true
+	return Input.is_joy_button_pressed(id, JOY_BUTTON_A)
+
+
+func _read_movement_input() -> float:
+	# Player zero can use the keyboard (for speed of testing)
+	if id ==0:
+		var direction := 0
+		if Input.is_key_pressed(KEY_A):
+			direction -= 1
+		if Input.is_key_pressed(KEY_D):
+			direction += 1
+		if direction != 0:
+			return direction
+	return Input.get_joy_axis(id, JOY_AXIS_LEFT_X)
 
 
 func _shoot()->void:

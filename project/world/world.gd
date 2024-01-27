@@ -7,6 +7,12 @@ var _players_joined : Array[int] = []
 @onready var _spawn_point_parent := $SpawnPoints
 
 func _input(event:InputEvent)->void:
+	if event is InputEventKey\
+		and event.is_pressed()\
+		and event.keycode == KEY_SPACE\
+		and not _players_joined.has(0):
+		_add_player(0)
+	
 	if event is InputEventJoypadButton and event.is_pressed():
 		var player_index := event.device
 		if player_index <= MAX_PLAYER_INDEX \
