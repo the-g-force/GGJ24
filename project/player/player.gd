@@ -51,6 +51,7 @@ func _physics_process(delta):
 		
 		if _is_crouch_pressed() and is_on_floor():
 			_crouch()
+			velocity.x = 0
 		else:
 			_crouching = false
 
