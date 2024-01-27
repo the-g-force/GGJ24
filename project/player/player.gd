@@ -23,7 +23,7 @@ func _physics_process(delta):
 	if _is_jump_input_pressed() and is_on_floor():
 		velocity.y = JUMP_VELOCITY
 	
-	if Input.is_joy_button_pressed(id, JOY_BUTTON_X) and _can_shoot:
+	if _is_shoot_pressed() and _can_shoot:
 		_shoot()
 
 	var direction = _read_movement_input()
@@ -44,6 +44,13 @@ func _is_jump_input_pressed() -> bool:
 	return Input.is_joy_button_pressed(id, JOY_BUTTON_A)
 
 
+func _is_shoot_pressed() -> bool:
+	if id == 0:
+		if Input.is_key_pressed(KEY_Z):
+			return true
+	return Input.is_joy_button_pressed(id, JOY_BUTTON_X)
+
+
 func _read_movement_input() -> float:
 	# Player zero can use the keyboard (for speed of testing)
 	if id ==0:
@@ -62,9 +69,12 @@ func _shoot()->void:
 	_can_shoot = false
 	
 	var nut := preload("res://player/nut/nut.tscn").instantiate()
+	nut.shooter = self
 	add_sibling(nut)
 	nut.global_position = _mouth.global_position
 	nut.apply_central_impulse(Vector2(_x_facing, 0).rotated(-PI/8 * _x_facing) * 500)
+	
+	print("Shot!")
 	
 	_shoot_cooldown_timer.start(shoot_cooldown_time)
 	await _shoot_cooldown_timer.timeout
