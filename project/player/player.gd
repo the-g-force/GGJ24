@@ -13,10 +13,10 @@ var _can_shoot := true
 var _x_facing := 1
 
 @onready var _shoot_cooldown_timer : Timer = $ShootCooldownTimer
+@onready var _mouth : Node2D = $Mouth
 
 
 func _physics_process(delta):
-	# just the default script with joy actions instead of the ui_* actions
 	if not is_on_floor():
 		velocity.y += gravity * delta
 
@@ -42,7 +42,7 @@ func _shoot()->void:
 	
 	var nut := preload("res://player/nut/nut.tscn").instantiate()
 	add_sibling(nut)
-	nut.global_position = global_position
+	nut.global_position = _mouth.global_position
 	nut.apply_central_impulse(Vector2(_x_facing, 0).rotated(-PI/8 * _x_facing) * 500)
 	
 	_shoot_cooldown_timer.start(shoot_cooldown_time)
@@ -51,4 +51,5 @@ func _shoot()->void:
 
 
 func _draw()->void:
-	draw_circle(Vector2.ZERO, 10, Color.ORANGE)
+	draw_circle(Vector2(0, -22.5), 10, Color.ORANGE)
+	draw_rect(Rect2(Vector2(-5, -22.5), Vector2(10, 22.5)), Color.ORANGE)
