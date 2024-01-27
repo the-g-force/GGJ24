@@ -1,12 +1,17 @@
 extends Node2D
 
+const MAX_PLAYER_INDEX := 3
+
 var _players_joined : Array[int] = []
 
+@onready var _spawn_point_parent := $SpawnPoints
 
 func _input(event:InputEvent)->void:
 	if event is InputEventJoypadButton and event.is_pressed():
-		if not _players_joined.has(event.device):
-			_add_player(event.device)
+		var player_index := event.device
+		if player_index <= MAX_PLAYER_INDEX \
+			and not _players_joined.has(player_index):
+			_add_player(player_index)
 
 
 func _add_player(id:int)->void:
@@ -14,5 +19,6 @@ func _add_player(id:int)->void:
 	
 	var player := preload("res://player/player.tscn").instantiate()
 	add_child(player)
-	player.global_position = $SpawnPoint.global_position
+	var spawn_point := _spawn_point_parent.get_children()[id]
+	player.global_position = spawn_point.global_position
 	player.id = id
