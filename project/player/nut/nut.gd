@@ -34,5 +34,5 @@ func pickup()->void:
 
 
 func _on_area_2d_body_entered(body:PhysicsBody2D)->void:
-	if body is Player and get_collision_layer_value(2):
+	if body is Player and body != shooter and not is_on_floor():
 		body.hit()
