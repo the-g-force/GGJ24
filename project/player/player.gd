@@ -75,6 +75,11 @@ var _dead := false
 
 
 func _ready():
+	# The animation tree is turned on when the game starts.
+	# This lets us keep it off during editing, since it has to be turned off
+	# to tinker with our animations, which is annoying.
+	$AnimationTree.active = true
+	
 	$PlayerIdLabel.text = "P%d" % (id+1)
 
 

@@ -308,6 +308,7 @@ position = Vector2(25, 62)
 script = ExtResource("3_8k74h")
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
+active = false
 libraries = {
 "": SubResource("AnimationLibrary_gdp4s")
 }
