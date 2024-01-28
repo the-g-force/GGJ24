@@ -278,13 +278,11 @@ position = Vector2(30, 4)
 [node name="Cheek_Right" type="Marker2D" parent="SpriteHolder/StandingSprite"]
 position = Vector2(-1, -31)
 script = ExtResource("3_8k74h")
-radius = 12.0
 
 [node name="Cheek_Left" type="Marker2D" parent="SpriteHolder/StandingSprite"]
 z_index = -2
 position = Vector2(19, -31)
 script = ExtResource("3_8k74h")
-radius = 12.0
 
 [node name="Leg_Right" type="Sprite2D" parent="SpriteHolder/StandingSprite"]
 position = Vector2(2, 51)
