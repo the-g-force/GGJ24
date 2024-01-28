@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cpxsloc30cse5"]
+[gd_scene load_steps=14 format=3 uid="uid://cpxsloc30cse5"]
 
 [ext_resource type="Script" path="res://world/round_over_screen.gd" id="1_mdsyc"]
 [ext_resource type="FontFile" uid="uid://d3mue5uggm4qm" path="res://luckiest_guy.ttf" id="2_cqw5p"]
@@ -6,6 +6,10 @@
 [sub_resource type="LabelSettings" id="LabelSettings_fipf4"]
 font = ExtResource("2_cqw5p")
 font_size = 64
+
+[sub_resource type="LabelSettings" id="LabelSettings_rsiop"]
+font = ExtResource("2_cqw5p")
+font_size = 40
 
 [sub_resource type="LabelSettings" id="LabelSettings_qfnw1"]
 font = ExtResource("2_cqw5p")
@@ -65,57 +69,74 @@ layout_mode = 2
 size_flags_vertical = 6
 columns = 2
 
+[node name="PlayerHeader" type="Label" parent="VBoxContainer/GridContainer"]
+layout_mode = 2
+text = "Players"
+label_settings = SubResource("LabelSettings_rsiop")
+horizontal_alignment = 1
+
+[node name="WinsHeader" type="Label" parent="VBoxContainer/GridContainer"]
+layout_mode = 2
+text = "Wins
+"
+label_settings = SubResource("LabelSettings_rsiop")
+horizontal_alignment = 1
+
 [node name="Player0Label" type="Label" parent="VBoxContainer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 label_settings = SubResource("LabelSettings_qfnw1")
-horizontal_alignment = 2
+horizontal_alignment = 1
 
 [node name="Player0Score" type="Label" parent="VBoxContainer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 label_settings = SubResource("LabelSettings_mn3m8")
+horizontal_alignment = 1
 
 [node name="Player1Label" type="Label" parent="VBoxContainer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 label_settings = SubResource("LabelSettings_xk6us")
-horizontal_alignment = 2
+horizontal_alignment = 1
 
 [node name="Player1Score" type="Label" parent="VBoxContainer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 label_settings = SubResource("LabelSettings_kk4am")
+horizontal_alignment = 1
 
 [node name="Player2Label" type="Label" parent="VBoxContainer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 label_settings = SubResource("LabelSettings_65t2y")
-horizontal_alignment = 2
+horizontal_alignment = 1
 
 [node name="Player2Score" type="Label" parent="VBoxContainer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 label_settings = SubResource("LabelSettings_67cb2")
+horizontal_alignment = 1
 
 [node name="Player3Label" type="Label" parent="VBoxContainer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 label_settings = SubResource("LabelSettings_lnyxv")
-horizontal_alignment = 2
+horizontal_alignment = 1
 
 [node name="Player3Score" type="Label" parent="VBoxContainer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 label_settings = SubResource("LabelSettings_g4pb4")
+horizontal_alignment = 1
 
 [node name="ContinueLabel" type="Label" parent="VBoxContainer"]
 layout_mode = 2
