@@ -86,6 +86,7 @@ position = Vector2(174, 759)
 position = Vector2(1714, 760)
 
 [node name="GameOverLabel" type="Label" parent="."]
+visible = false
 z_index = 100
 offset_left = 915.0
 offset_top = 539.0
@@ -94,6 +95,7 @@ offset_bottom = 562.0
 horizontal_alignment = 1
 
 [node name="RoundOverScreen" parent="." instance=ExtResource("5_63ovj")]
+visible = false
 z_index = 100
 anchors_preset = 8
 anchor_left = 0.5
