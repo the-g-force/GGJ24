@@ -1,0 +1,43 @@
+[gd_scene load_steps=6 format=3 uid="uid://4qifxc8csj2k"]
+
+[ext_resource type="Script" path="res://game_over_popup.gd" id="1_j8h47"]
+[ext_resource type="FontFile" uid="uid://d3mue5uggm4qm" path="res://luckiest_guy.ttf" id="2_upcev"]
+[ext_resource type="Texture2D" uid="uid://cv0fvyr6y3twp" path="res://player/king_bust.png" id="2_vrl8h"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_au1j8"]
+font = ExtResource("2_upcev")
+font_size = 64
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_db1cy"]
+font = ExtResource("2_upcev")
+font_size = 32
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+
+[node name="GameOverPopup" type="Node2D"]
+z_index = 100
+script = ExtResource("1_j8h47")
+
+[node name="King" type="Sprite2D" parent="."]
+position = Vector2(957, 399)
+scale = Vector2(4, 4)
+texture = ExtResource("2_vrl8h")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 591.0
+offset_top = 730.0
+offset_right = 1330.0
+offset_bottom = 818.0
+text = "Player N is the WINNER!"
+label_settings = SubResource("LabelSettings_au1j8")
+
+[node name="Label2" type="Label" parent="."]
+offset_left = 913.0
+offset_top = 274.0
+offset_right = 953.0
+offset_bottom = 307.0
+text = "N"
+label_settings = SubResource("LabelSettings_db1cy")
+horizontal_alignment = 1
