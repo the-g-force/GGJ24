@@ -103,3 +103,6 @@ offset_bottom = 725.0
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 bus = &"Music"
+
+[node name="Fanfare" type="AudioStreamPlayer" parent="."]
+bus = &"SFX"

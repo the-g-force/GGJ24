@@ -7,6 +7,9 @@ const THEME_SONGS := [
 	"res://world/game_theme_4.ogg",
 ]
 
+const FANFARE_SHORT := preload("res://world/fanfare_short.wav")
+const FANFARE_LONG := preload("res://world/fanfare_long.wav")
+
 ## The number of players that start in this round of the game
 @export var joined_player_ids : Array[int] = [0, 1, 2, 3]
 @export var seconds_between_rounds := 3.0
@@ -62,6 +65,11 @@ func _on_player_died(player:Player) -> void:
 
 
 func _end_round()->void:
+	$Music.stop()
+	$Fanfare.stream = FANFARE_SHORT
+	get_tree().create_timer(0.5).timeout.connect(func():
+		$Fanfare.play()
+	)
 	$RoundOverScreen.show()
 	$RoundOverScreen.update_wins(player_wins, joined_player_colors)
 	while not _is_any_joy_pressing_start():
@@ -86,6 +94,11 @@ func _load_new_round()->void:
 
 
 func _end_game(winner_id:int)->void:
+	$Music.stop()
+	$Fanfare.stream = FANFARE_LONG
+	get_tree().create_timer(0.5).timeout.connect(func():
+		$Fanfare.play()
+	)
 	$GameOverPopup.visible = true
 	$GameOverPopup.display(winner_id, joined_player_colors[winner_id])
 	while not _is_any_joy_pressing_start():
