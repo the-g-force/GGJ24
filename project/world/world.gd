@@ -61,6 +61,7 @@ func _end_round()->void:
 func _load_new_round()->void:
 	var new_scene = load("res://world/world.tscn").instantiate()
 	new_scene.joined_player_ids = joined_player_ids
+	new_scene.joined_player_colors = joined_player_colors
 	new_scene.player_wins = player_wins
 	add_sibling(new_scene)
 	queue_free()

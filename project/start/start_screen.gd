@@ -36,7 +36,6 @@ func _start_game()->void:
 
 func _get_unused_color(search_direction:int)->Color:
 	var used_colors := _joined_player_colors.values()
-	print(used_colors)
 	var color_index := 0
 	while used_colors.has(player_colors[color_index]):
 		color_index += search_direction
