@@ -35,6 +35,15 @@ const DEATH_SOUNDS := [
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var id : int
+var color : Color :
+	set(value):
+		color = value
+		var stylebox := StyleBoxFlat.new()
+		stylebox.bg_color = color
+		stylebox.border_color = color
+		stylebox.set_corner_radius_all(5)
+		stylebox.set_border_width_all(4)
+		$PanelContainer.add_theme_stylebox_override("panel", stylebox)
 var _max_nuts := CHEEK_SIZES.size() - 1
 var _can_shoot := true
 var _x_facing := 1 :
@@ -80,7 +89,7 @@ func _ready():
 	# to tinker with our animations, which is annoying.
 	$AnimationTree.active = true
 	
-	$PlayerIdLabel.text = "P%d" % (id+1)
+	$PanelContainer/PlayerIdLabel.text = "P%d" % (id+1)
 
 
 func _physics_process(delta):

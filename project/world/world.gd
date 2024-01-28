@@ -8,6 +8,12 @@ extends Node2D
 
 var _players : Array[Player]
 var player_wins := {}
+var joined_player_colors := {
+	0:Color.WHITE,
+	1:Color.WHITE,
+	2:Color.WHITE,
+	3:Color.WHITE,
+}
 var _pending_game_over := false
 
 func _ready():
@@ -22,6 +28,7 @@ func _ready():
 func _add_player(id:int)->void:
 	var player := preload("res://player/player.tscn").instantiate()
 	player.id = id
+	player.color = joined_player_colors[id]
 	add_child(player)
 	var spawn_point := _spawn_point_parent.get_children()[id]
 	player.global_position = spawn_point.global_position

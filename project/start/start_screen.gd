@@ -1,6 +1,13 @@
 extends Control
 
+@export var player_colors : Array[Color] = [
+	Color.RED, Color.GREEN,
+	Color.BLUE, Color.YELLOW,
+	Color.HOT_PINK, Color.CORAL,
+]
+
 var _joined_player_ids : Array[int] = []
+var _joined_player_colors := {}
 
 
 func _input(event:InputEvent)->void:
@@ -13,11 +20,25 @@ func _input(event:InputEvent)->void:
 
 func _join_player(id:int)->void:
 	_joined_player_ids.append(id)
-	get_node("HBoxContainer/PlayerBanner" + str(id)).show()
+	_joined_player_colors[id] = _get_unused_color(1)
+	var player_banner := get_node("HBoxContainer/PlayerBanner" + str(id))
+	player_banner.modulate = Color.WHITE
+	player_banner.color = _joined_player_colors[id]
 
 
 func _start_game()->void:
 	var game := preload("res://world/world.tscn").instantiate()
 	game.joined_player_ids = _joined_player_ids
+	game.joined_player_colors = _joined_player_colors
 	add_sibling(game)
 	queue_free()
+
+
+func _get_unused_color(search_direction:int)->Color:
+	var used_colors := _joined_player_colors.values()
+	print(used_colors)
+	var color_index := 0
+	while used_colors.has(player_colors[color_index]):
+		color_index += search_direction
+		color_index %= player_colors.size()
+	return player_colors[color_index]
