@@ -5,7 +5,7 @@ signal died
 
 const SPEED = 300.0
 const JUMP_VELOCITY = -800.0
-const CHEEK_SIZES := [0, 8, 12, 14]
+const CHEEK_SIZES : Array[int] = [0, 8, 12, 14]
 
 const STUN_SOUNDS := [
 	"res://player/stun1.wav",
@@ -28,6 +28,7 @@ const DEATH_SOUNDS := [
 
 @export var shoot_cooldown_time := 0.5
 @export var stun_duration := 2.5
+@export var cheek_change_duration := 0.3
 
 ## How much along the axis counts as pressing down
 @export var pickup_axis_threshold := 0.1
@@ -54,7 +55,9 @@ var _stored_nuts := 0:
 	set(value):
 		_stored_nuts = value
 		for cheek in _cheeks:
-			cheek.radius = CHEEK_SIZES[_stored_nuts]
+			var desired_size := CHEEK_SIZES[_stored_nuts]
+			var tween := create_tween()
+			tween.tween_property(cheek, "radius", desired_size, cheek_change_duration)
 var _stunned := false
 var _crouching := false:
 	set(value):
