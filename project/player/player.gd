@@ -184,6 +184,9 @@ func hit()->void:
 	_crouching = false
 	velocity.x = 0
 	
+	_randomize_pitch($HitSound)
+	$HitSound.play()
+	
 	if _stored_nuts > 0:
 		_drop_nuts()
 		stun()

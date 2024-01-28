@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://hhgrn0x4be0o"]
+[gd_scene load_steps=34 format=3 uid="uid://hhgrn0x4be0o"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_fs2d3"]
 [ext_resource type="Texture2D" uid="uid://dahaux5tcbrky" path="res://player/chipmunk.png" id="2_xea5d"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://player/mouth.gd" id="6_nwcku"]
 [ext_resource type="AudioStream" uid="uid://cayvx4uqmtp2d" path="res://player/foot.wav" id="8_aqw3x"]
 [ext_resource type="AudioStream" uid="uid://5elfff2a3aci" path="res://player/spit.wav" id="9_0hdtc"]
+[ext_resource type="AudioStream" uid="uid://d3urbfj2oit3v" path="res://player/hit1.wav" id="10_t3lne"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yeyjv"]
 size = Vector2(80, 160)
@@ -339,4 +340,8 @@ bus = &"SFX"
 
 [node name="JumpSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("9_0hdtc")
+bus = &"SFX"
+
+[node name="HitSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_t3lne")
 bus = &"SFX"
