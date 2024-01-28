@@ -14,6 +14,12 @@ const STUN_SOUNDS := [
 	"res://player/stun4.wav",
 	"res://player/stun5.wav",
 ]
+const JUMP_SOUNDS := [
+	"res://player/jump1.wav",
+	"res://player/jump2.wav",
+	"res://player/jump3.wav",
+	"res://player/jump5.wav",
+]
 
 @export var shoot_cooldown_time := 0.5
 @export var stun_duration := 2.5
@@ -74,6 +80,9 @@ func _physics_process(delta):
 	if not _stunned and not _dead:
 		if _is_jump_input_pressed() and is_on_floor():
 			velocity.y = JUMP_VELOCITY
+			$JumpSound.stream = load(JUMP_SOUNDS.pick_random())
+			_randomize_pitch($JumpSound)
+			$JumpSound.play()
 		
 		if _is_crouch_pressed() and is_on_floor():
 			_crouch()
