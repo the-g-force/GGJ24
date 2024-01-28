@@ -97,6 +97,7 @@ offset_bottom = 725.0
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_j8sbv")
 autoplay = true
+bus = &"Music"
 
 [node name="Nut5" parent="." instance=ExtResource("4_uktu2")]
 position = Vector2(956, 609)
