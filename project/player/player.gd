@@ -20,6 +20,11 @@ const JUMP_SOUNDS := [
 	"res://player/jump3.wav",
 	"res://player/jump5.wav",
 ]
+const DEATH_SOUNDS := [
+	"res://player/death2.wav",
+	"res://player/death3.wav",
+	"res://player/death4.wav",
+]
 
 @export var shoot_cooldown_time := 0.5
 @export var stun_duration := 2.5
@@ -191,6 +196,8 @@ func hit()->void:
 		_drop_nuts()
 		stun()
 	else:
+		$DeathSound.stream = load(DEATH_SOUNDS.pick_random())
+		$DeathSound.play()
 		died.emit()
 		_state_machine.travel("death")
 		_dead = true
