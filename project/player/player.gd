@@ -7,6 +7,14 @@ const SPEED = 300.0
 const JUMP_VELOCITY = -800.0
 const CHEEK_SIZES := [0, 8, 12, 14]
 
+const STUN_SOUNDS := [
+	"res://player/stun1.wav",
+	"res://player/stun2.wav",
+	"res://player/stun3.wav",
+	"res://player/stun4.wav",
+	"res://player/stun5.wav",
+]
+
 @export var shoot_cooldown_time := 0.5
 @export var stun_duration := 2.5
 
@@ -175,6 +183,8 @@ func hit()->void:
 
 
 func stun() -> void:
+	$StunSound.stream = load(STUN_SOUNDS.pick_random())
+	$StunSound.play()
 	_stunned = true
 	_state_machine.travel("stunned")
 	# Wait until the stunned animation is finished
