@@ -9,6 +9,7 @@ font = ExtResource("2_ipd4h")
 font_size = 32
 
 [node name="PlayerBanner" type="VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
 offset_right = 430.0
 offset_bottom = 317.0
 size_flags_horizontal = 3
@@ -20,7 +21,10 @@ size_flags_vertical = 3
 texture = ExtResource("1_jogga")
 stretch_mode = 5
 
-[node name="Label" type="Label" parent="."]
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer"]
 layout_mode = 2
 text = "Player 0
 "

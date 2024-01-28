@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://cpxsloc30cse5"]
+[gd_scene load_steps=12 format=3 uid="uid://cpxsloc30cse5"]
 
 [ext_resource type="Script" path="res://world/round_over_screen.gd" id="1_mdsyc"]
 [ext_resource type="FontFile" uid="uid://d3mue5uggm4qm" path="res://luckiest_guy.ttf" id="2_cqw5p"]
@@ -7,7 +7,35 @@
 font = ExtResource("2_cqw5p")
 font_size = 64
 
-[sub_resource type="LabelSettings" id="LabelSettings_qbwle"]
+[sub_resource type="LabelSettings" id="LabelSettings_qfnw1"]
+font = ExtResource("2_cqw5p")
+font_size = 32
+
+[sub_resource type="LabelSettings" id="LabelSettings_mn3m8"]
+font = ExtResource("2_cqw5p")
+font_size = 32
+
+[sub_resource type="LabelSettings" id="LabelSettings_xk6us"]
+font = ExtResource("2_cqw5p")
+font_size = 32
+
+[sub_resource type="LabelSettings" id="LabelSettings_kk4am"]
+font = ExtResource("2_cqw5p")
+font_size = 32
+
+[sub_resource type="LabelSettings" id="LabelSettings_65t2y"]
+font = ExtResource("2_cqw5p")
+font_size = 32
+
+[sub_resource type="LabelSettings" id="LabelSettings_67cb2"]
+font = ExtResource("2_cqw5p")
+font_size = 32
+
+[sub_resource type="LabelSettings" id="LabelSettings_lnyxv"]
+font = ExtResource("2_cqw5p")
+font_size = 32
+
+[sub_resource type="LabelSettings" id="LabelSettings_g4pb4"]
 font = ExtResource("2_cqw5p")
 font_size = 32
 
@@ -19,55 +47,69 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_mdsyc")
 
-[node name="Label" type="Label" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 0
 text = "Round Over"
 label_settings = SubResource("LabelSettings_fipf4")
 horizontal_alignment = 1
 
-[node name="GridContainer" type="GridContainer" parent="."]
+[node name="GridContainer" type="GridContainer" parent="VBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
+size_flags_vertical = 6
 columns = 2
 
-[node name="Player0Label" type="Label" parent="GridContainer"]
+[node name="Player0Label" type="Label" parent="VBoxContainer/GridContainer"]
 layout_mode = 2
-label_settings = SubResource("LabelSettings_qbwle")
-horizontal_alignment = 1
+size_flags_horizontal = 3
+size_flags_vertical = 1
+label_settings = SubResource("LabelSettings_qfnw1")
+horizontal_alignment = 2
 
-[node name="Player0Score" type="Label" parent="GridContainer"]
+[node name="Player0Score" type="Label" parent="VBoxContainer/GridContainer"]
 layout_mode = 2
-label_settings = SubResource("LabelSettings_qbwle")
-horizontal_alignment = 1
+size_flags_horizontal = 3
+size_flags_vertical = 1
+label_settings = SubResource("LabelSettings_mn3m8")
 
-[node name="Player1Label" type="Label" parent="GridContainer"]
+[node name="Player1Label" type="Label" parent="VBoxContainer/GridContainer"]
 layout_mode = 2
-label_settings = SubResource("LabelSettings_qbwle")
-horizontal_alignment = 1
+size_flags_horizontal = 3
+size_flags_vertical = 1
+label_settings = SubResource("LabelSettings_xk6us")
+horizontal_alignment = 2
 
-[node name="Player1Score" type="Label" parent="GridContainer"]
+[node name="Player1Score" type="Label" parent="VBoxContainer/GridContainer"]
 layout_mode = 2
-label_settings = SubResource("LabelSettings_qbwle")
-horizontal_alignment = 1
+size_flags_horizontal = 3
+size_flags_vertical = 1
+label_settings = SubResource("LabelSettings_kk4am")
 
-[node name="Player2Label" type="Label" parent="GridContainer"]
+[node name="Player2Label" type="Label" parent="VBoxContainer/GridContainer"]
 layout_mode = 2
-label_settings = SubResource("LabelSettings_qbwle")
-horizontal_alignment = 1
+size_flags_horizontal = 3
+size_flags_vertical = 1
+label_settings = SubResource("LabelSettings_65t2y")
+horizontal_alignment = 2
 
-[node name="Player2Score" type="Label" parent="GridContainer"]
+[node name="Player2Score" type="Label" parent="VBoxContainer/GridContainer"]
 layout_mode = 2
-label_settings = SubResource("LabelSettings_qbwle")
-horizontal_alignment = 1
+size_flags_horizontal = 3
+size_flags_vertical = 1
+label_settings = SubResource("LabelSettings_67cb2")
 
-[node name="Player3Label" type="Label" parent="GridContainer"]
+[node name="Player3Label" type="Label" parent="VBoxContainer/GridContainer"]
 layout_mode = 2
-label_settings = SubResource("LabelSettings_qbwle")
-horizontal_alignment = 1
+size_flags_horizontal = 3
+size_flags_vertical = 1
+label_settings = SubResource("LabelSettings_lnyxv")
+horizontal_alignment = 2
 
-[node name="Player3Score" type="Label" parent="GridContainer"]
+[node name="Player3Score" type="Label" parent="VBoxContainer/GridContainer"]
 layout_mode = 2
-label_settings = SubResource("LabelSettings_qbwle")
-horizontal_alignment = 1
+size_flags_horizontal = 3
+size_flags_vertical = 1
+label_settings = SubResource("LabelSettings_g4pb4")

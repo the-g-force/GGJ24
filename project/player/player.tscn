@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://hhgrn0x4be0o"]
+[gd_scene load_steps=36 format=3 uid="uid://hhgrn0x4be0o"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_fs2d3"]
 [ext_resource type="Texture2D" uid="uid://dahaux5tcbrky" path="res://player/chipmunk.png" id="2_xea5d"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://d0lobwd24urv1" path="res://player/mouth.png" id="5_2vm4a"]
 [ext_resource type="Script" path="res://player/mouth.gd" id="6_nwcku"]
 [ext_resource type="AudioStream" uid="uid://cayvx4uqmtp2d" path="res://player/foot.wav" id="8_aqw3x"]
+[ext_resource type="FontFile" uid="uid://d3mue5uggm4qm" path="res://luckiest_guy.ttf" id="8_lvsjm"]
 [ext_resource type="AudioStream" uid="uid://5elfff2a3aci" path="res://player/spit.wav" id="9_0hdtc"]
 [ext_resource type="AudioStream" uid="uid://d3urbfj2oit3v" path="res://player/hit1.wav" id="10_t3lne"]
 
@@ -61,26 +62,26 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("PlayerIdLabel:visible")
+tracks/3/path = NodePath("SpriteHolder:rotation")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
+"update": 0,
+"values": [0.0]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("SpriteHolder:rotation")
+tracks/4/path = NodePath("PanelContainer:visible")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_4vghp"]
@@ -89,26 +90,26 @@ length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("PlayerIdLabel:visible")
+tracks/0/path = NodePath("SpriteHolder:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("SpriteHolder:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [0.0, -1.5708]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PanelContainer:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_d1hex"]
@@ -231,6 +232,9 @@ states/stunned/position = Vector2(708, 131)
 transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_awpdl"), "idle", "run", SubResource("AnimationNodeStateMachineTransition_nr6ym"), "run", "idle", SubResource("AnimationNodeStateMachineTransition_46b0g"), "idle", "stunned", SubResource("AnimationNodeStateMachineTransition_djpmg"), "run", "stunned", SubResource("AnimationNodeStateMachineTransition_cgl08"), "stunned", "idle", SubResource("AnimationNodeStateMachineTransition_udn2x"), "idle", "death", SubResource("AnimationNodeStateMachineTransition_u70ae"), "run", "death", SubResource("AnimationNodeStateMachineTransition_ibbx2"), "stunned", "death", SubResource("AnimationNodeStateMachineTransition_twxih")]
 graph_offset = Vector2(-3, 16)
 
+[sub_resource type="LabelSettings" id="LabelSettings_p6y57"]
+font = ExtResource("8_lvsjm")
+
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
 script = ExtResource("1_fs2d3")
@@ -320,12 +324,16 @@ libraries = {
 "": SubResource("AnimationLibrary_gdp4s")
 }
 
-[node name="PlayerIdLabel" type="Label" parent="."]
-offset_left = -19.0
-offset_top = -184.0
-offset_right = 21.0
-offset_bottom = -161.0
+[node name="PanelContainer" type="PanelContainer" parent="."]
+offset_left = -10.0
+offset_top = -200.0
+offset_right = 2.0
+offset_bottom = -183.0
+
+[node name="PlayerIdLabel" type="Label" parent="PanelContainer"]
+layout_mode = 2
 text = "N"
+label_settings = SubResource("LabelSettings_p6y57")
 horizontal_alignment = 1
 
 [node name="FootSound" type="AudioStreamPlayer" parent="."]

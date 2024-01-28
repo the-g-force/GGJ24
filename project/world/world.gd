@@ -8,6 +8,12 @@ extends Node2D
 
 var _players : Array[Player]
 var player_wins := {}
+var joined_player_colors := {
+	0:Color.WHITE,
+	1:Color.WHITE,
+	2:Color.WHITE,
+	3:Color.WHITE,
+}
 var _pending_game_over := false
 
 func _ready():
@@ -22,6 +28,7 @@ func _ready():
 func _add_player(id:int)->void:
 	var player := preload("res://player/player.tscn").instantiate()
 	player.id = id
+	player.color = joined_player_colors[id]
 	add_child(player)
 	var spawn_point := _spawn_point_parent.get_children()[id]
 	player.global_position = spawn_point.global_position
@@ -46,7 +53,7 @@ func _on_player_died(player:Player) -> void:
 
 func _end_round()->void:
 	$RoundOverScreen.show()
-	$RoundOverScreen.update_wins(player_wins)
+	$RoundOverScreen.update_wins(player_wins, joined_player_colors)
 	await get_tree().create_timer(seconds_between_rounds).timeout
 	_load_new_round()
 
@@ -54,6 +61,7 @@ func _end_round()->void:
 func _load_new_round()->void:
 	var new_scene = load("res://world/world.tscn").instantiate()
 	new_scene.joined_player_ids = joined_player_ids
+	new_scene.joined_player_colors = joined_player_colors
 	new_scene.player_wins = player_wins
 	add_sibling(new_scene)
 	queue_free()
@@ -61,7 +69,7 @@ func _load_new_round()->void:
 
 func _end_game(winner_id:int)->void:
 	$GameOverLabel.visible = true
-	$GameOverLabel.text = "Game Over! Chipmunk %s won!" % winner_id
+	$GameOverLabel.text = "Game Over! Chipmunk %s won!" % (winner_id + 1)
 	await get_tree().create_timer(seconds_between_rounds).timeout
 	add_sibling(load("res://start/start_screen.tscn").instantiate())
 	queue_free()
