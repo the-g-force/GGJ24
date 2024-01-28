@@ -2,8 +2,7 @@ extends Control
 
 @export var player_colors : Array[Color] = [
 	Color.RED, Color.GREEN,
-	Color.BLUE, Color.YELLOW,
-	Color.HOT_PINK, Color.CORAL,
+	Color.BLUE, Color.GOLD,
 ]
 
 var _joined_player_ids : Array[int] = []
