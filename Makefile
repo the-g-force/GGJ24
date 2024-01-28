@@ -17,7 +17,7 @@ linux:
 zip: windows linux
 	mkdir -p build/zip
 	mkdir -p build/zip/src
-	rsync -av --progress project build/zip/src --exclude .import
+	rsync -av --progress project build/zip/src --exclude .godot
 	echo "This project was built using [Godot Engine](https://godotengine.org)." > build/zip/src/README.md
 	mkdir -p build/zip/release/linux
 	mkdir -p build/zip/release/windows
