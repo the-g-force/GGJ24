@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://4qifxc8csj2k"]
+[gd_scene load_steps=7 format=3 uid="uid://4qifxc8csj2k"]
 
 [ext_resource type="Script" path="res://game_over_popup.gd" id="1_j8h47"]
 [ext_resource type="FontFile" uid="uid://d3mue5uggm4qm" path="res://luckiest_guy.ttf" id="2_upcev"]
@@ -7,6 +7,11 @@
 [sub_resource type="LabelSettings" id="LabelSettings_au1j8"]
 font = ExtResource("2_upcev")
 font_size = 64
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_j7a16"]
+font = ExtResource("2_upcev")
 outline_size = 8
 outline_color = Color(0, 0, 0, 1)
 
@@ -32,6 +37,15 @@ offset_right = 1330.0
 offset_bottom = 818.0
 text = "Player N is the WINNER!"
 label_settings = SubResource("LabelSettings_au1j8")
+
+[node name="Label3" type="Label" parent="."]
+offset_left = 607.0
+offset_top = 962.0
+offset_right = 1346.0
+offset_bottom = 1050.0
+text = "press Start to continue"
+label_settings = SubResource("LabelSettings_j7a16")
+horizontal_alignment = 1
 
 [node name="Label2" type="Label" parent="."]
 offset_left = 913.0

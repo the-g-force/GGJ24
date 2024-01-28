@@ -64,8 +64,16 @@ func _on_player_died(player:Player) -> void:
 func _end_round()->void:
 	$RoundOverScreen.show()
 	$RoundOverScreen.update_wins(player_wins, joined_player_colors)
-	await get_tree().create_timer(seconds_between_rounds).timeout
+	while not _is_any_joy_pressing_start():
+		await get_tree().process_frame
 	_load_new_round()
+
+
+func _is_any_joy_pressing_start()->bool:
+	for i in joined_player_ids:
+		if Input.is_joy_button_pressed(i, JOY_BUTTON_START):
+			return true
+	return false
 
 
 func _load_new_round()->void:
@@ -80,6 +88,7 @@ func _load_new_round()->void:
 func _end_game(winner_id:int)->void:
 	$GameOverPopup.visible = true
 	$GameOverPopup.display(winner_id, joined_player_colors[winner_id])
-	await get_tree().create_timer(seconds_between_rounds).timeout
+	while not _is_any_joy_pressing_start():
+		await get_tree().process_frame
 	add_sibling(load("res://start/start_screen.tscn").instantiate())
 	queue_free()

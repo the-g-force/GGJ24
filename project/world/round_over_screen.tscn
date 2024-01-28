@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cpxsloc30cse5"]
+[gd_scene load_steps=13 format=3 uid="uid://cpxsloc30cse5"]
 
 [ext_resource type="Script" path="res://world/round_over_screen.gd" id="1_mdsyc"]
 [ext_resource type="FontFile" uid="uid://d3mue5uggm4qm" path="res://luckiest_guy.ttf" id="2_cqw5p"]
@@ -38,6 +38,9 @@ font_size = 32
 [sub_resource type="LabelSettings" id="LabelSettings_g4pb4"]
 font = ExtResource("2_cqw5p")
 font_size = 32
+
+[sub_resource type="LabelSettings" id="LabelSettings_g2m70"]
+font = ExtResource("2_cqw5p")
 
 [node name="RoundOverScreen" type="PanelContainer"]
 anchors_preset = 15
@@ -113,3 +116,10 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 label_settings = SubResource("LabelSettings_g4pb4")
+
+[node name="ContinueLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+text = "Press Start to continue"
+label_settings = SubResource("LabelSettings_g2m70")
+horizontal_alignment = 1
