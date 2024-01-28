@@ -1,10 +1,59 @@
-[gd_scene load_steps=8 format=3 uid="uid://c6jxu352brs6v"]
+[gd_scene load_steps=21 format=3 uid="uid://c6jxu352brs6v"]
 
 [ext_resource type="Script" path="res://start/start_screen.gd" id="1_p7173"]
-[ext_resource type="Texture2D" uid="uid://dse4vugnod2sc" path="res://common/blue_land.png" id="2_cy33j"]
+[ext_resource type="Shader" path="res://start/start_screen.gdshader" id="2_2hxma"]
 [ext_resource type="FontFile" uid="uid://d3mue5uggm4qm" path="res://luckiest_guy.ttf" id="2_pc50c"]
+[ext_resource type="Texture2D" uid="uid://dse4vugnod2sc" path="res://common/blue_land.png" id="3_npeno"]
 [ext_resource type="AudioStream" uid="uid://dnkubyijnqrjq" path="res://start/menu_theme.ogg" id="3_rdoso"]
 [ext_resource type="PackedScene" uid="uid://1yejph8y06w7" path="res://start/player_banner.tscn" id="3_xdy6d"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y3106"]
+bg_color = Color(0.701961, 0.372549, 0.0196078, 1)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(0.0705882, 0.0705882, 0.0705882, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rb3yi"]
+bg_color = Color(0.470588, 0.247059, 0.0156863, 1)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jymox"]
+bg_color = Color(0.309804, 0.164706, 0.00784314, 1)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="Theme" id="Theme_ad8we"]
+Button/font_sizes/font_size = 32
+Button/fonts/font = ExtResource("2_pc50c")
+Button/styles/hover = SubResource("StyleBoxFlat_y3106")
+Button/styles/normal = SubResource("StyleBoxFlat_rb3yi")
+Button/styles/pressed = SubResource("StyleBoxFlat_jymox")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hvwba"]
+shader = ExtResource("2_2hxma")
+shader_parameter/from = Color(1, 0, 0, 1)
+shader_parameter/to = Color(1, 0, 1, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_x36hn"]
 font = ExtResource("2_pc50c")
@@ -14,6 +63,71 @@ font_size = 64
 font = ExtResource("2_pc50c")
 font_size = 128
 
+[sub_resource type="LabelSettings" id="LabelSettings_scy8y"]
+font = ExtResource("2_pc50c")
+font_size = 32
+
+[sub_resource type="LabelSettings" id="LabelSettings_5gu66"]
+font = ExtResource("2_pc50c")
+font_size = 32
+
+[sub_resource type="Animation" id="Animation_s82u6"]
+length = 4.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:material:shader_parameter/from")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 0, 0, 1), Color(1, 0, 1, 1), Color(0, 0, 1, 1), Color(1, 1, 0, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TextureRect:material:shader_parameter/to")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1, 2, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 0, 1, 1), Color(0, 0, 1, 1), Color(1, 1, 0, 1), Color(1, 0, 0, 1)]
+}
+
+[sub_resource type="Gradient" id="Gradient_fe0fo"]
+colors = PackedColorArray(1, 0, 0, 1, 1, 0, 1, 1)
+
+[sub_resource type="Gradient" id="Gradient_q5ica"]
+colors = PackedColorArray(1, 0, 1, 1, 0, 0, 1, 1)
+
+[sub_resource type="Animation" id="Animation_fldfv"]
+resource_name = "gradient"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:texture:gradient")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [SubResource("Gradient_fe0fo"), SubResource("Gradient_q5ica")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hcj3e"]
+_data = {
+"RESET": SubResource("Animation_s82u6"),
+"gradient": SubResource("Animation_fldfv")
+}
+
 [node name="StartScreen" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -21,17 +135,19 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = SubResource("Theme_ad8we")
 script = ExtResource("1_p7173")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 modulate = Color(0.486275, 0.490196, 0.458824, 1)
+material = SubResource("ShaderMaterial_hvwba")
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_cy33j")
+texture = ExtResource("3_npeno")
 
 [node name="Title" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -59,12 +175,19 @@ text = "simulator"
 label_settings = SubResource("LabelSettings_x36hn")
 horizontal_alignment = 1
 
+[node name="Credits" type="Label" parent="Title"]
+layout_mode = 2
+text = "A global game jam 2024 game by Paul, Alex, and Leo gestwicki"
+label_settings = SubResource("LabelSettings_scy8y")
+horizontal_alignment = 1
+
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 317.0
+offset_top = 335.0
+offset_bottom = -325.0
 grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
@@ -85,7 +208,59 @@ player_index = 3
 layout_mode = 2
 player_index = 4
 
+[node name="MenuButtons" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -206.0
+offset_bottom = -126.0
+grow_horizontal = 2
+grow_vertical = 0
+alignment = 1
+
+[node name="QuitButton" type="Button" parent="MenuButtons"]
+layout_mode = 2
+text = "Quit
+"
+
+[node name="MuteMusicButton" type="Button" parent="MenuButtons"]
+layout_mode = 2
+toggle_mode = true
+text = "Mute Music"
+
+[node name="MuteSFXButton" type="Button" parent="MenuButtons"]
+layout_mode = 2
+toggle_mode = true
+text = "Mute Sound Effects"
+
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_rdoso")
 autoplay = true
 bus = &"Music"
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -23.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Press A to join and the start button to play!
+
+Left stick to move, a to jump, x to shoot. Left stick down allows you to duck and pick up more nuts!"
+label_settings = SubResource("LabelSettings_5gu66")
+horizontal_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_hcj3e")
+}
+autoplay = "RESET"
+
+[connection signal="pressed" from="MenuButtons/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="toggled" from="MenuButtons/MuteMusicButton" to="." method="_on_mute_music_button_toggled"]
+[connection signal="toggled" from="MenuButtons/MuteSFXButton" to="." method="_on_mute_sfx_button_toggled"]

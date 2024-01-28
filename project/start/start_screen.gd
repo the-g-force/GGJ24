@@ -9,6 +9,14 @@ extends Control
 var _joined_player_ids : Array[int] = []
 var _joined_player_colors := {}
 
+@onready var _music_bus_index := AudioServer.get_bus_index("Music")
+@onready var _sfx_bus_index := AudioServer.get_bus_index("SFX")
+
+
+func _ready()->void:
+	$MenuButtons/MuteMusicButton.button_pressed = AudioServer.is_bus_mute(_music_bus_index)
+	$MenuButtons/MuteSFXButton.button_pressed = AudioServer.is_bus_mute(_sfx_bus_index)
+
 
 func _input(event:InputEvent)->void:
 	if event is InputEventJoypadButton and event.is_pressed():
@@ -41,3 +49,15 @@ func _get_unused_color(search_direction:int)->Color:
 		color_index += search_direction
 		color_index %= player_colors.size()
 	return player_colors[color_index]
+
+
+func _on_quit_button_pressed()->void:
+	get_tree().quit()
+
+
+func _on_mute_music_button_toggled(toggled_on:bool)->void:
+	AudioServer.set_bus_mute(_music_bus_index, toggled_on)
+
+
+func _on_mute_sfx_button_toggled(toggled_on:bool)->void:
+	AudioServer.set_bus_mute(_sfx_bus_index, toggled_on)
