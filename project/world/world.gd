@@ -53,7 +53,7 @@ func _on_player_died(player:Player) -> void:
 
 func _end_round()->void:
 	$RoundOverScreen.show()
-	$RoundOverScreen.update_wins(player_wins)
+	$RoundOverScreen.update_wins(player_wins, joined_player_colors)
 	await get_tree().create_timer(seconds_between_rounds).timeout
 	_load_new_round()
 
@@ -69,7 +69,7 @@ func _load_new_round()->void:
 
 func _end_game(winner_id:int)->void:
 	$GameOverLabel.visible = true
-	$GameOverLabel.text = "Game Over! Chipmunk %s won!" % winner_id
+	$GameOverLabel.text = "Game Over! Chipmunk %s won!" % (winner_id + 1)
 	await get_tree().create_timer(seconds_between_rounds).timeout
 	add_sibling(load("res://start/start_screen.tscn").instantiate())
 	queue_free()
