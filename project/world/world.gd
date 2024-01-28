@@ -79,7 +79,7 @@ func _load_new_round()->void:
 
 func _end_game(winner_id:int)->void:
 	$GameOverPopup.visible = true
-	$GameOverPopup.display(winner_id, joined_player_colors[winner_id], joined_player_ids.size())
+	$GameOverPopup.display(winner_id, joined_player_colors[winner_id])
 	await get_tree().create_timer(seconds_between_rounds).timeout
 	add_sibling(load("res://start/start_screen.tscn").instantiate())
 	queue_free()
