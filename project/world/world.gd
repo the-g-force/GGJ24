@@ -1,5 +1,12 @@
 extends Node2D
 
+const THEME_SONGS := [
+	"res://world/game_theme.ogg",
+	"res://world/game_theme_2.ogg",
+	"res://world/game_theme_3.ogg",
+	"res://world/game_theme_4.ogg",
+]
+
 ## The number of players that start in this round of the game
 @export var joined_player_ids : Array[int] = [0, 1, 2, 3]
 @export var seconds_between_rounds := 3.0
@@ -23,6 +30,9 @@ func _ready():
 		for id in joined_player_ids:
 			if not player_wins.has(id):
 				player_wins[id] = 0
+	
+	$Music.stream = load(THEME_SONGS.pick_random())
+	$Music.play()
 
 
 func _add_player(id:int)->void:

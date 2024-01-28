@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cb1t8bqr7040n"]
+[gd_scene load_steps=10 format=3 uid="uid://cb1t8bqr7040n"]
 
 [ext_resource type="Script" path="res://world/world.gd" id="1_aelts"]
 [ext_resource type="Texture2D" uid="uid://dse4vugnod2sc" path="res://common/blue_land.png" id="2_c8nmk"]
@@ -6,7 +6,6 @@
 [ext_resource type="Texture2D" uid="uid://bnqcov8qrllao" path="res://world/platformPack_tile004.png" id="3_aedeq"]
 [ext_resource type="PackedScene" uid="uid://rhho6c4dxbly" path="res://player/nut/nut.tscn" id="4_uktu2"]
 [ext_resource type="PackedScene" uid="uid://cpxsloc30cse5" path="res://world/round_over_screen.tscn" id="5_63ovj"]
-[ext_resource type="AudioStream" uid="uid://cvlpkuosep7oi" path="res://world/game_theme.ogg" id="7_j8sbv"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jv3ai"]
 texture = ExtResource("2_l1py1")
@@ -107,7 +106,5 @@ offset_top = 355.0
 offset_right = 1250.0
 offset_bottom = 725.0
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("7_j8sbv")
-autoplay = true
+[node name="Music" type="AudioStreamPlayer" parent="."]
 bus = &"Music"
