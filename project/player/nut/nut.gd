@@ -8,6 +8,7 @@ const SPEED := 600.0
 var shooter : Node2D
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var _rotations_per_second := randf_range(1.0, 4.0) * (-1 if randi() % 2 == 0 else 1)
+var _players_hit := []
 var direction := Vector2.ZERO :
 	set(value):
 		direction = value
@@ -42,4 +43,6 @@ func pickup()->void:
 
 func _on_area_2d_body_entered(body:PhysicsBody2D)->void:
 	if body is Player and body != shooter and not is_on_floor():
-		body.hit()
+		if not _players_hit.has(body):
+			body.hit()
+			_players_hit.append(body)
