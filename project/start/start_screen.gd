@@ -13,7 +13,7 @@ func _input(event:InputEvent)->void:
 
 func _join_player(id:int)->void:
 	_joined_player_ids.append(id)
-	get_node("HBoxContainer/PlayerBanner" + str(id + 1)).texture = load("res://player/chipmunk.png")
+	get_node("HBoxContainer/PlayerBanner" + str(id)).show()
 
 
 func _start_game()->void:

@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://1yejph8y06w7"]
+
+[ext_resource type="Script" path="res://start/player_banner.gd" id="1_dhwa8"]
+[ext_resource type="Texture2D" uid="uid://dahaux5tcbrky" path="res://player/chipmunk.png" id="1_jogga"]
+[ext_resource type="FontFile" uid="uid://d3mue5uggm4qm" path="res://luckiest_guy.ttf" id="2_ipd4h"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ccwbp"]
+font = ExtResource("2_ipd4h")
+font_size = 32
+
+[node name="PlayerBanner" type="VBoxContainer"]
+offset_right = 430.0
+offset_bottom = 317.0
+size_flags_horizontal = 3
+script = ExtResource("1_dhwa8")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("1_jogga")
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+text = "Player 0
+"
+label_settings = SubResource("LabelSettings_ccwbp")
+horizontal_alignment = 1
