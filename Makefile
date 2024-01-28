@@ -27,4 +27,4 @@ zip: windows linux
 	cp LICENSE build/zip
 	mkdir -p build/zip/press
 	cp -r press/* build/zip/press
-	cd build/zip;	zip $(name).zip -r .
+	cd build/zip;	zip $(name)-src.zip -r .
