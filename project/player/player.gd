@@ -142,6 +142,8 @@ func _shoot()->void:
 	_can_shoot = false
 	_stored_nuts -= 1
 	
+	_randomize_pitch($SpitSound)
+	$SpitSound.play()
 	_shoot_cooldown_timer.start(shoot_cooldown_time)
 	
 	await create_tween().tween_property(_mouth, "percent_length", 1.0, 0.1).set_trans(Tween.TRANS_QUAD).finished
@@ -206,6 +208,10 @@ func _drop_nuts()->void:
 
 func _play_foot_sound_if_on_ground() -> void:
 	if is_on_floor():
-		var pitch_scale := randfn(1.0, 0.2)
-		$FootSound.pitch_scale = pitch_scale
+		_randomize_pitch($FootSound)
 		$FootSound.play()
+
+
+func _randomize_pitch(player:AudioStreamPlayer) -> void:
+	var pitch_scale := randfn(1.0, 0.2)
+	player.pitch_scale = pitch_scale
