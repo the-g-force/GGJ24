@@ -1,10 +1,12 @@
-[gd_scene load_steps=29 format=3 uid="uid://hhgrn0x4be0o"]
+[gd_scene load_steps=31 format=3 uid="uid://hhgrn0x4be0o"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_fs2d3"]
 [ext_resource type="Texture2D" uid="uid://dahaux5tcbrky" path="res://player/chipmunk.png" id="2_xea5d"]
 [ext_resource type="Script" path="res://player/cheek.gd" id="3_8k74h"]
 [ext_resource type="Texture2D" uid="uid://bl2s4g1v6ksci" path="res://player/crouching_chipmunk.png" id="3_bouvk"]
 [ext_resource type="Texture2D" uid="uid://cadnyurilui1h" path="res://player/leg.png" id="3_k3hfn"]
+[ext_resource type="Texture2D" uid="uid://d0lobwd24urv1" path="res://player/mouth.png" id="5_2vm4a"]
+[ext_resource type="Script" path="res://player/mouth.gd" id="6_nwcku"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yeyjv"]
 size = Vector2(80, 160)
@@ -220,9 +222,6 @@ shape = SubResource("RectangleShape2D_yeyjv")
 [node name="ShootCooldownTimer" type="Timer" parent="."]
 one_shot = true
 
-[node name="Mouth" type="Node2D" parent="."]
-position = Vector2(3, -113)
-
 [node name="NutPickupArea" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 4
@@ -241,6 +240,16 @@ disabled = true
 [node name="StandingSprite" type="Sprite2D" parent="SpriteHolder"]
 position = Vector2(0, -80)
 texture = ExtResource("2_xea5d")
+
+[node name="Mouth" type="Sprite2D" parent="SpriteHolder/StandingSprite"]
+position = Vector2(9, -30)
+scale = Vector2(1e-05, 1)
+texture = ExtResource("5_2vm4a")
+centered = false
+script = ExtResource("6_nwcku")
+
+[node name="Marker2D" type="Marker2D" parent="SpriteHolder/StandingSprite/Mouth"]
+position = Vector2(30, 4)
 
 [node name="Cheek_Right" type="Marker2D" parent="SpriteHolder/StandingSprite"]
 position = Vector2(-1, -31)

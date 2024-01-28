@@ -18,7 +18,10 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var id : int
 var _max_nuts := CHEEK_SIZES.size() - 1
 var _can_shoot := true
-var _x_facing := 1
+var _x_facing := 1 :
+	set(value):
+		_x_facing = value
+		_sprite_holder.scale.x = _x_facing
 var _stored_nuts := 0:
 	set(value):
 		_stored_nuts = value
@@ -35,7 +38,8 @@ var _crouching := false:
 var _dead := false
 
 @onready var _shoot_cooldown_timer : Timer = $ShootCooldownTimer
-@onready var _mouth : Node2D = $Mouth
+@onready var _mouth : Sprite2D = $SpriteHolder/StandingSprite/Mouth
+@onready var _nut_appear_location : Marker2D = $SpriteHolder/StandingSprite/Mouth/Marker2D
 @onready var _nut_pickup_area : Area2D = $NutPickupArea
 @onready var _sprite_holder := $SpriteHolder
 @onready var _standing_sprite := $SpriteHolder/StandingSprite
@@ -81,7 +85,6 @@ func _physics_process(delta):
 			if abs(direction) > 0.1:
 				velocity.x = direction * SPEED
 				_x_facing = sign(direction)
-				_sprite_holder.scale.x = _x_facing
 				_state_machine.travel("run")
 			else:
 				velocity.x = move_toward(velocity.x, 0, SPEED)
@@ -131,13 +134,17 @@ func _shoot()->void:
 	_can_shoot = false
 	_stored_nuts -= 1
 	
+	_shoot_cooldown_timer.start(shoot_cooldown_time)
+	
+	await create_tween().tween_property(_mouth, "percent_length", 1.0, 0.1).set_trans(Tween.TRANS_QUAD).finished
 	var nut := preload("res://player/nut/nut.tscn").instantiate()
 	nut.shooter = self
 	nut.direction = Vector2(_x_facing, 0).rotated(-PI/8 * _x_facing)
 	add_sibling(nut)
-	nut.global_position = _mouth.global_position
+	nut.global_position = _nut_appear_location.global_position
 	
-	_shoot_cooldown_timer.start(shoot_cooldown_time)
+	create_tween().tween_property(_mouth, "percent_length", 0.0, 0.1).set_trans(Tween.TRANS_QUAD)
+	
 	await _shoot_cooldown_timer.timeout
 	_can_shoot = true
 
