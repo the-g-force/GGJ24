@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://hhgrn0x4be0o"]
+[gd_scene load_steps=32 format=3 uid="uid://hhgrn0x4be0o"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_fs2d3"]
 [ext_resource type="Texture2D" uid="uid://dahaux5tcbrky" path="res://player/chipmunk.png" id="2_xea5d"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://cadnyurilui1h" path="res://player/leg.png" id="3_k3hfn"]
 [ext_resource type="Texture2D" uid="uid://d0lobwd24urv1" path="res://player/mouth.png" id="5_2vm4a"]
 [ext_resource type="Script" path="res://player/mouth.gd" id="6_nwcku"]
+[ext_resource type="AudioStream" uid="uid://cayvx4uqmtp2d" path="res://player/foot.wav" id="8_aqw3x"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yeyjv"]
 size = Vector2(80, 160)
@@ -138,6 +139,23 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
 "values": [0.0, 0.314159, -0.314159, 0.0]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"_play_foot_sound_if_on_ground"
+}, {
+"args": [],
+"method": &"_play_foot_sound_if_on_ground"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_k0sqh"]
@@ -306,3 +324,7 @@ offset_right = 21.0
 offset_bottom = -161.0
 text = "N"
 horizontal_alignment = 1
+
+[node name="FootSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_aqw3x")
+bus = &"SFX"

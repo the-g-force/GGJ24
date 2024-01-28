@@ -192,3 +192,10 @@ func _drop_nuts()->void:
 		call_deferred("add_sibling", nut)
 		nut.global_position = _mouth.global_position
 	_stored_nuts = 0
+
+
+func _play_foot_sound_if_on_ground() -> void:
+	if is_on_floor():
+		var pitch_scale := randfn(1.0, 0.2)
+		$FootSound.pitch_scale = pitch_scale
+		$FootSound.play()
