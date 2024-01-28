@@ -14,7 +14,7 @@ func _input(event:InputEvent)->void:
 	if event is InputEventJoypadButton and event.is_pressed():
 		if not _joined_player_ids.has(event.device) and event.button_index == JOY_BUTTON_A:
 			_join_player(event.device)
-		elif event.button_index == JOY_BUTTON_START:
+		elif event.button_index == JOY_BUTTON_START and _joined_player_ids.size() > 1:
 			_start_game()
 
 
